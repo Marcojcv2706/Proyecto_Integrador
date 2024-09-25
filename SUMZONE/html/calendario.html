@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario 2024</title>
+    <link rel="stylesheet" href="../css/calendario.css">
+</head>
+<body>
+    <div class="calendar-container">
+        <button id="prevMonth" class="nav-button">&lt;</button>
+        <div id="calendar"></div>
+        <button id="nextMonth" class="nav-button">&gt;</button>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span id="close" class="close">&times;</span>
+            <h2>Añadir Actividad</h2>
+            <input type="text" id="activity" placeholder="Actividad">
+            <button id="addActivity">Añadir</button>
+        </div>
+    </div>
+
+    <script src="../js/calendario.js"></script>
+</body>
+</html>
