@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,10 +20,17 @@
                 <li><a href="https://www.flickr.com/photos/isamisiones/albums/with/72177720316806309" target="_blank">Álbum de Fotos</a></li>
             </ul>
         </nav>
+        
+        <?php if (isset($_SESSION['username'])): ?>
+            <div class="user-profile">
+                <p>Bienvenido, <?php echo htmlspecialchars($_SESSION['username']); ?></p>
+                <a href="php/logout.php">Cerrar sesión</a>
+            </div>
+        <?php endif; ?>
     </header>
 
     <main class="content">
-        <h1>Bienvenido a SUMZONE</h1>
+        <h1 class="main-title">Bienvenido a SUMZONE</h1>
         <p>Accede a nuestra comunidad y regístrate en los mejores talleres de la zona.</p>
         <a href="php/login_register.php" class="btn">Comenzar</a>
     </main>
@@ -28,5 +38,6 @@
     <footer class="main-footer">
         <p>&copy; 2024 SUMZONE. Todos los derechos reservados.</p>
     </footer>
+    <a href="" class="suggestions-link">Sugerencias, Preguntas y Pedidos de Eventos</a>
 </body>
 </html>

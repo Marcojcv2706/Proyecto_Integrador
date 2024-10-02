@@ -8,12 +8,19 @@ if (isset($_POST['register'])) {
     $password = password_hash($_POST['reg_password'], PASSWORD_DEFAULT);
     $email = $_POST['reg_email'];
 
-    $sql = "INSERT INTO usuarios (username, password, email) VALUES ('$username', '$password', '$email')";
+    // Verificar si el correo ya está registrado
+    $checkEmail = "SELECT * FROM usuarios WHERE email='$email'";
+    $resultEmail = $conn->query($checkEmail);
 
-    if ($conn->query($sql) === TRUE) {
-        echo "<script>alert('Registro exitoso');</script>";
+    if ($resultEmail->num_rows > 0) {
+        echo "<script>alert('El correo ya está registrado'); window.location.href = 'register.php';</script>";
     } else {
-        echo "Error en el registro: " . $conn->error;
+        $sql = "INSERT INTO usuarios (username, password, email) VALUES ('$username', '$password', '$email')";
+        if ($conn->query($sql) === TRUE) {
+            echo "<script>alert('Registro exitoso'); window.location.href = '../index.php';</script>";
+        } else {
+            echo "Error en el registro: " . $conn->error;
+        }
     }
 }
 
@@ -29,7 +36,8 @@ if (isset($_POST['login'])) {
         $user = $result->fetch_assoc();
         if (password_verify($password, $user['password'])) {
             $_SESSION['username'] = $username;
-            header("Location: principal.php");
+            header("Location: ../index.php"); // Redirigir a index.php
+            exit(); // Asegurarse de detener la ejecución del script
         } else {
             echo "<script>alert('Contraseña incorrecta');</script>";
         }
@@ -48,15 +56,17 @@ if (isset($_POST['login'])) {
 </head>
 <body>
     <div class="container">
-        <div class="login-form">
+        <div id="login-form" class="form-section" style="display: block;">
             <h2>Iniciar Sesión</h2>
             <form method="POST" action="">
                 <input type="text" name="login_username" placeholder="Nombre de usuario" required>
                 <input type="password" name="login_password" placeholder="Contraseña" required>
                 <button type="submit" name="login">Iniciar Sesión</button>
             </form>
+            <p>¿No tienes una cuenta? <a href="#" onclick="showRegister()">Regístrate aquí</a></p>
         </div>
-        <div class="register-form">
+        
+        <div id="register-form" class="form-section" style="display: none;">
             <h2>Registrarse</h2>
             <form method="POST" action="">
                 <input type="text" name="reg_username" placeholder="Nombre de usuario" required>
@@ -64,7 +74,20 @@ if (isset($_POST['login'])) {
                 <input type="password" name="reg_password" placeholder="Contraseña" required>
                 <button type="submit" name="register">Registrarse</button>
             </form>
+            <p>¿Ya tienes una cuenta? <a href="#" onclick="showLogin()">Inicia sesión aquí</a></p>
         </div>
     </div>
+
+    <script>
+        function showRegister() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('register-form').style.display = 'block';
+        }
+        
+        function showLogin() {
+            document.getElementById('register-form').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+        }
+    </script>
 </body>
 </html>
