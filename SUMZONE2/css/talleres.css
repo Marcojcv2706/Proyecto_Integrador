@@ -1,0 +1,73 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+}
+
+/* Contenedor principal de talleres */
+.talleres {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Estilos para cada taller */
+.taller {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+}
+
+.taller h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #1aa815;
+}
+
+.taller p {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.taller p strong {
+    color: #333;
+}
+
+/* Estilos para los botones */
+form button {
+    background-color: #1aa815;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #2fa512;
+}
+
+/* Ajustes para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .talleres {
+        flex-direction: column;
+        align-items: center;
+    }
+}

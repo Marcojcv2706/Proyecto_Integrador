@@ -22,11 +22,11 @@ body::before {
 }
 
 .main-title {
-    border: 1px solid white; /* Define el grosor y color del borde */
-    padding: 5px; /* Espacio interno alrededor del texto */
-    display: inline-block; /* Para que el borde se ajuste al tamaño del texto */
-    color: #333; /* Color del texto del título */
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente para mejor visibilidad */
+    border: 1px solid white;
+    padding: 5px;
+    display: inline-block;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .main-header {
@@ -34,7 +34,7 @@ body::before {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #2fa512; /* Verde de la barra superior */
+    background-color: #2fa512;
     color: white;
 }
 
@@ -43,8 +43,8 @@ body::before {
 }
 
 .navbar {
-    background-color: #4CAF50; /* Color de fondo de la barra de navegación */
-    padding: 10px 0; /* Espaciado interno */
+    background-color: #2fa512;
+    padding: 10px 0;
     text-align: center;
     width: 100%;
 }
@@ -79,7 +79,7 @@ body::before {
     width: 100%;
     height: 100%;
     z-index: -1;
-    border-bottom: 2px solid #81C784; /* Línea verde claro al hacer hover */
+    border-bottom: 2px solid #1aa815;
     border-radius: 15px;
     transform: scale(0) translateY(50px);
     opacity: 0;
@@ -104,26 +104,30 @@ body::before {
 }
 
 .content p {
-    color: #666;
-    margin-bottom: 20px;
+    color: #2fa512;
+    border: 1px solid white;
+    margin-bottom: 1px;
+    background-color: rgba(255, 255, 255, 0.74);
+    width: 80%; /* Establece un ancho específico, como 80% del contenedor padre */
+    max-width: 600px; /* Opcional: establece un ancho máximo */
+    margin: 0 auto; /* Centra el elemento horizontalmente */
+    padding: 10px; /* Opcional: agrega algo de espacio interno */
 }
 
 .btn {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #2fa512; /* Verde para el botón */
-    color: white;
+    background-color: #2fa512;
     text-decoration: none;
     border-radius: 4px;
     font-weight: bold;
 }
 
 .btn:hover {
-    background-color: #0dd839; /* Color de fondo más claro al pasar el mouse */
-}
+    background-color: #35770f;
 
 .main-footer {
-    background-color: #2fa512; /* Verde de la barra de pie de página */
+    background-color: #2fa512;
     color: white;
     text-align: center;
     padding: 10px 0;
@@ -135,15 +139,16 @@ body::before {
     position: fixed;
     bottom: 10px;
     right: 10px;
-    background-color: #2fa512; /* Color de fondo */
-    color: white; /* Color del texto */
-    padding: 8px 12px; /* Espaciado interno */
-    border-radius: 4px; /* Bordes redondeados */
-    text-decoration: none; /* Sin subrayado */
-    font-size: 14px; /* Tamaño de fuente */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra */
+    background-color: #2fa512;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 .suggestions-link:hover {
-    background-color: #0dd839; /* Cambia el color al pasar el ratón */
+    background-color: #35770f;
+}
 }

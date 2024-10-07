@@ -7,15 +7,15 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SUMZONE - Bienvenido</title>
-    <link rel="stylesheet" href="css/styles.css"> <!-- Asegúrate de que este enlace apunte a tu archivo CSS correctamente -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <header class="main-header">
-        <img src="images/logo.png" alt="Logo SUMZONE" class="logo"> <!-- Cambia la ruta si es necesario -->
+        <img src="images/logo.png" alt="Logo SUMZONE" class="logo">
         <nav class="navbar">
             <ul>
                 <li><a href="php/login_register.php">Iniciar Sesión</a></li>
-                <li><a href="php/">Talleres</a></li>
+                <li><a href="php/talleres.php">Talleres</a></li>
                 <li><a href="php/">Calendario</a></li>
                 <li><a href="https://www.flickr.com/photos/isamisiones/albums/with/72177720316806309" target="_blank">Álbum de Fotos</a></li>
             </ul>
@@ -31,8 +31,7 @@ session_start();
 
     <main class="content">
         <h1 class="main-title">Bienvenido a SUMZONE</h1>
-        <p>Accede a nuestra comunidad y regístrate en los mejores talleres de la zona.</p>
-        <a href="php/login_register.php" class="btn">Comenzar</a>
+        <p>Accede a toda la informacion hacerca del SUM y sus eventos, horarios y talleres.</p>
     </main>
 
     <footer class="main-footer">
