@@ -7,9 +7,9 @@ $sql = "SELECT * FROM talleres";
 $result = $conn->query($sql);
 
 if (isset($_POST['inscribirse'])) {
-    $usuario_id = $_SESSION['usuario_id']; // Debes tener el ID del usuario logueado
+    $usuario_id = $_SESSION['username']; // Debes tener el ID del usuario logueado
     $taller_id = $_POST['taller_id'];
-
+var_dump($usuario_id);
     // Verificar si ya está inscrito en el taller
     $checkInscripcion = "SELECT * FROM inscripciones WHERE usuario_id='$usuario_id' AND taller_id='$taller_id'";
     $resultCheck = $conn->query($checkInscripcion);
@@ -29,7 +29,7 @@ if (isset($_POST['inscribirse'])) {
 
 if (isset($_POST['eliminar'])) {
     $taller_id = $_POST['taller_id'];
-    $usuario_id = $_SESSION['usuario_id'];
+    $usuario_id = $_SESSION['username'];
 
     // Eliminar la inscripción
     $sqlEliminar = "DELETE FROM inscripciones WHERE usuario_id='$usuario_id' AND taller_id='$taller_id'";
@@ -51,6 +51,7 @@ if (isset($_POST['eliminar'])) {
 </head>
 <body>
     <h1>Talleres Disponibles</h1>
+    <a href="../index.php"><button>HOME</button></a>
     <div class="talleres">
         <?php while ($row = $result->fetch_assoc()): ?>
             <div class="taller">
