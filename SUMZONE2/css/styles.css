@@ -104,7 +104,7 @@ body::before {
 }
 
 .content p {
-    color: #2fa512;
+    color: #000000;
     border: 1px solid white;
     margin-bottom: 1px;
     background-color: rgba(255, 255, 255, 0.74);

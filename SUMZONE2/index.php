@@ -17,6 +17,7 @@ session_start();
                 <li><a href="php/login_register.php">Iniciar Sesión</a></li>
                 <li><a href="php/talleres.php">Talleres</a></li>
                 <li><a href="php/">Calendario</a></li>
+                <li><a href="">Eventos</a></li>
                 <li><a href="https://www.flickr.com/photos/isamisiones/albums/with/72177720316806309" target="_blank">Álbum de Fotos</a></li>
             </ul>
         </nav>
