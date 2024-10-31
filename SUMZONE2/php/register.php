@@ -8,13 +8,13 @@ if (isset($_POST['register'])) {
     $email = $_POST['reg_email'];
 
     // Verificar si el correo ya está registrado
-    $checkEmail = "SELECT * FROM usuarios WHERE email='$email'";
+    $checkEmail = "SELECT * FROM usuario WHERE Email='$email'";
     $resultEmail = $conn->query($checkEmail);
 
     if ($resultEmail->num_rows > 0) {
         echo "<script>alert('El correo ya está registrado'); window.location.href = 'register.php';</script>";
     } else {
-        $sql = "INSERT INTO usuarios (username, password, email) VALUES ('$username', '$password', '$email')";
+        $sql = "INSERT INTO usuario (username, Email, contraseña) VALUES ('$username', '$email', '$password')";
         if ($conn->query($sql) === TRUE) {
             $_SESSION['username'] = $username; // Guarda el nombre de usuario en la sesión
             echo "<script>alert('Registro exitoso'); window.location.href = 'index.php';</script>";

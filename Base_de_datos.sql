@@ -31,9 +31,10 @@ ENGINE = InnoDB;
 -- Table `SUMZONE`.`USUARIO`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SUMZONE`.`USUARIO` (
+  `username` VARCHAR(50) NOT NULL,
   `Email` VARCHAR(50) NOT NULL,
   `Contraseña` VARCHAR(50) NOT NULL,
-  `PERSONA_ID` INT NOT NULL,
+  `PERSONA_ID` INT NOT NULL AUTO_INCREMENT,
   `INSCRIPCION_ID_inscripcion` INT NOT NULL,
   PRIMARY KEY (`PERSONA_ID`),
   INDEX `fk_USUARIO_INSCRIPCION1_idx` (`INSCRIPCION_ID_inscripcion` ASC),

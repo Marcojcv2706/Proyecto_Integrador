@@ -3,7 +3,7 @@ include 'conexion.php';  // Incluye tu conexión a la base de datos
 session_start();
 
 // Mostrar los talleres disponibles
-$sql = "SELECT * FROM talleres";
+$sql = "SELECT * FROM evento";
 $result = $conn->query($sql);
 
 if (isset($_POST['inscribirse'])) {
@@ -11,7 +11,7 @@ if (isset($_POST['inscribirse'])) {
     $taller_id = $_POST['taller_id'];
 var_dump($usuario_id);
     // Verificar si ya está inscrito en el taller
-    $checkInscripcion = "SELECT * FROM inscripciones WHERE usuario_id='$usuario_id' AND taller_id='$taller_id'";
+    $checkInscripcion = "SELECT * FROM evento e JOIN evento_has_inscripcion ev on ev.`EVENTO_ID eventos`= e.`ID eventos`	join inscripcion i on i.ID_inscripcion = ev.`INSCRIPCION_ID_inscripcion` WHERE `USUARIO_PERSONA_ID`='$usuario_id' AND `ID eventos`='$taller_id'";
     $resultCheck = $conn->query($checkInscripcion);
 
     if ($resultCheck->num_rows > 0) {
@@ -32,7 +32,7 @@ if (isset($_POST['eliminar'])) {
     $usuario_id = $_SESSION['username'];
 
     // Eliminar la inscripción
-    $sqlEliminar = "DELETE FROM inscripciones WHERE usuario_id='$usuario_id' AND taller_id='$taller_id'";
+    $sqlEliminar = "DELETE FROM inscripcion WHERE usuario_id='$usuario_id' AND taller_id='$taller_id'";
     if ($conn->query($sqlEliminar) === TRUE) {
         echo "<script>alert('Tu inscripción ha sido eliminada');</script>";
     } else {
