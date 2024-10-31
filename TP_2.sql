@@ -7,22 +7,6 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
--- -----------------------------------------------------
-<<<<<<< HEAD
--- Schema mydb
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
-
--- -----------------------------------------------------
--- Table `mydb`.`table1`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`table1` (
-=======
 -- Schema SUMZONE
 -- -----------------------------------------------------
 
@@ -33,24 +17,9 @@ CREATE SCHEMA IF NOT EXISTS `SUMZONE` DEFAULT CHARACTER SET utf8 ;
 USE `SUMZONE` ;
 
 -- -----------------------------------------------------
--- Table `SUMZONE`.`table1`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `SUMZONE`.`table1` (
->>>>>>> 603cb3a (base de datos)
-)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
-<<<<<<< HEAD
--- Table `mydb`.`INSCRIPCION`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`INSCRIPCION` (
-=======
 -- Table `SUMZONE`.`INSCRIPCION`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SUMZONE`.`INSCRIPCION` (
->>>>>>> 603cb3a (base de datos)
   `fecha_inscripcion` DATETIME NULL,
   `ID_inscripcion` INT NOT NULL,
   PRIMARY KEY (`ID_inscripcion`))
@@ -58,15 +27,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
-<<<<<<< HEAD
--- Table `mydb`.`USUARIO`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`USUARIO` (
-=======
 -- Table `SUMZONE`.`USUARIO`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SUMZONE`.`USUARIO` (
->>>>>>> 603cb3a (base de datos)
   `Email` VARCHAR(50) NOT NULL,
   `Contraseña` VARCHAR(50) NOT NULL,
   `PERSONA_ID` INT NOT NULL,
@@ -75,26 +38,16 @@ CREATE TABLE IF NOT EXISTS `SUMZONE`.`USUARIO` (
   INDEX `fk_USUARIO_INSCRIPCION1_idx` (`INSCRIPCION_ID_inscripcion` ASC),
   CONSTRAINT `fk_USUARIO_INSCRIPCION1`
     FOREIGN KEY (`INSCRIPCION_ID_inscripcion`)
-<<<<<<< HEAD
-    REFERENCES `mydb`.`INSCRIPCION` (`ID_inscripcion`)
-=======
     REFERENCES `SUMZONE`.`INSCRIPCION` (`ID_inscripcion`)
->>>>>>> 603cb3a (base de datos)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
-<<<<<<< HEAD
--- Table `mydb`.`EVENTO`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`EVENTO` (
-=======
 -- Table `SUMZONE`.`EVENTO`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SUMZONE`.`EVENTO` (
->>>>>>> 603cb3a (base de datos)
   `ID eventos` INT NOT NULL AUTO_INCREMENT,
   `Fecha_inicio` DATE NOT NULL,
   `fecha_fin` DATE NOT NULL,
@@ -107,26 +60,16 @@ CREATE TABLE IF NOT EXISTS `SUMZONE`.`EVENTO` (
   INDEX `fk_EVENTO_USUARIO1_idx` (`USUARIO_PERSONA_ID` ASC),
   CONSTRAINT `fk_EVENTO_USUARIO1`
     FOREIGN KEY (`USUARIO_PERSONA_ID`)
-<<<<<<< HEAD
-    REFERENCES `mydb`.`USUARIO` (`PERSONA_ID`)
-=======
     REFERENCES `SUMZONE`.`USUARIO` (`PERSONA_ID`)
->>>>>>> 603cb3a (base de datos)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
-<<<<<<< HEAD
--- Table `mydb`.`ROL`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`ROL` (
-=======
 -- Table `SUMZONE`.`ROL`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SUMZONE`.`ROL` (
->>>>>>> 603cb3a (base de datos)
   `ID` INT NOT NULL AUTO_INCREMENT,
   `descripcion_rol` VARCHAR(45) NULL,
   PRIMARY KEY (`ID`))
@@ -134,15 +77,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
-<<<<<<< HEAD
--- Table `mydb`.`USUARIO_has_ROL`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`USUARIO_has_ROL` (
-=======
 -- Table `SUMZONE`.`USUARIO_has_ROL`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SUMZONE`.`USUARIO_has_ROL` (
->>>>>>> 603cb3a (base de datos)
   `USUARIO_PERSONA_ID` INT NOT NULL,
   `ROL_ID` INT NOT NULL,
   `inscripcion` VARCHAR(60) NOT NULL,
@@ -151,35 +88,21 @@ CREATE TABLE IF NOT EXISTS `SUMZONE`.`USUARIO_has_ROL` (
   INDEX `fk_USUARIO_has_ROL_USUARIO1_idx` (`USUARIO_PERSONA_ID` ASC),
   CONSTRAINT `fk_USUARIO_has_ROL_USUARIO1`
     FOREIGN KEY (`USUARIO_PERSONA_ID`)
-<<<<<<< HEAD
-    REFERENCES `mydb`.`USUARIO` (`PERSONA_ID`)
-=======
     REFERENCES `SUMZONE`.`USUARIO` (`PERSONA_ID`)
->>>>>>> 603cb3a (base de datos)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_USUARIO_has_ROL_ROL1`
     FOREIGN KEY (`ROL_ID`)
-<<<<<<< HEAD
-    REFERENCES `mydb`.`ROL` (`ID`)
-=======
     REFERENCES `SUMZONE`.`ROL` (`ID`)
->>>>>>> 603cb3a (base de datos)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
-<<<<<<< HEAD
--- Table `mydb`.`EVENTO_has_INSCRIPCION`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`EVENTO_has_INSCRIPCION` (
-=======
 -- Table `SUMZONE`.`EVENTO_has_INSCRIPCION`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SUMZONE`.`EVENTO_has_INSCRIPCION` (
->>>>>>> 603cb3a (base de datos)
   `EVENTO_ID eventos` INT NOT NULL,
   `INSCRIPCION_ID_inscripcion` INT NOT NULL,
   PRIMARY KEY (`EVENTO_ID eventos`, `INSCRIPCION_ID_inscripcion`),
@@ -187,20 +110,12 @@ CREATE TABLE IF NOT EXISTS `SUMZONE`.`EVENTO_has_INSCRIPCION` (
   INDEX `fk_EVENTO_has_INSCRIPCION_EVENTO1_idx` (`EVENTO_ID eventos` ASC),
   CONSTRAINT `fk_EVENTO_has_INSCRIPCION_EVENTO1`
     FOREIGN KEY (`EVENTO_ID eventos`)
-<<<<<<< HEAD
-    REFERENCES `mydb`.`EVENTO` (`ID eventos`)
-=======
     REFERENCES `SUMZONE`.`EVENTO` (`ID eventos`)
->>>>>>> 603cb3a (base de datos)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_EVENTO_has_INSCRIPCION_INSCRIPCION1`
     FOREIGN KEY (`INSCRIPCION_ID_inscripcion`)
-<<<<<<< HEAD
-    REFERENCES `mydb`.`INSCRIPCION` (`ID_inscripcion`)
-=======
     REFERENCES `SUMZONE`.`INSCRIPCION` (`ID_inscripcion`)
->>>>>>> 603cb3a (base de datos)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
