@@ -3,7 +3,7 @@ include 'conexion.php';  // Incluye tu conexión a la base de datos
 session_start();
 
 // Mostrar los talleres disponibles
-$sql = "SELECT * FROM evento";
+$sql = "SELECT * FROM INSCRIPCION";
 $result = $conn->query($sql);
 
 if (isset($_POST['inscribirse'])) {
@@ -11,14 +11,14 @@ if (isset($_POST['inscribirse'])) {
     $taller_id = $_POST['taller_id'];
 var_dump($usuario_id);
     // Verificar si ya está inscrito en el taller
-    $checkInscripcion = "SELECT * FROM evento e JOIN evento_has_inscripcion ev on ev.`EVENTO_ID eventos`= e.`ID eventos`	join inscripcion i on i.ID_inscripcion = ev.`INSCRIPCION_ID_inscripcion` WHERE `USUARIO_PERSONA_ID`='$usuario_id' AND `ID eventos`='$taller_id'";
+    $checkInscripcion = "SELECT * FROM INSCRIPCION WHERE `ID_usuario`='$usuario_id' AND `ID_eventos`='$taller_id'";
     $resultCheck = $conn->query($checkInscripcion);
 
     if ($resultCheck->num_rows > 0) {
         echo "<script>alert('Ya estás inscrito en este taller');</script>";
     } else {
         // Insertar la inscripción
-        $sqlInscripcion = "INSERT INTO inscripciones (usuario_id, taller_id) VALUES ('$usuario_id', '$taller_id')";
+        $sqlInscripcion = "INSERT INTO INSCRIPCION (ID_usuario, ID_evento) VALUES ('$usuario_id', '$taller_id')";
         if ($conn->query($sqlInscripcion) === TRUE) {
             echo "<script>alert('Te has inscrito exitosamente');</script>";
         } else {

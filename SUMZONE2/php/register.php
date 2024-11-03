@@ -14,7 +14,7 @@ if (isset($_POST['register'])) {
     if ($resultEmail->num_rows > 0) {
         echo "<script>alert('El correo ya está registrado'); window.location.href = 'register.php';</script>";
     } else {
-        $sql = "INSERT INTO usuario (username, Email, contraseña) VALUES ('$username', '$email', '$password')";
+        $sql = "INSERT INTO usuario (username, Email, Contraseña) VALUES ('$username', '$email', '$password')";
         if ($conn->query($sql) === TRUE) {
             $_SESSION['username'] = $username; // Guarda el nombre de usuario en la sesión
             echo "<script>alert('Registro exitoso'); window.location.href = 'index.php';</script>";

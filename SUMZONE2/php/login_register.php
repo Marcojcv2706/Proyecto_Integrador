@@ -2,7 +2,6 @@
 include 'conexion.php';
 session_start();
 
-// Manejo del registro
 if (isset($_POST['register'])) {
     $username = $_POST['reg_username'];
     $password = password_hash($_POST['reg_password'], PASSWORD_DEFAULT);
@@ -15,7 +14,7 @@ if (isset($_POST['register'])) {
     if ($resultEmail->num_rows > 0) {
         echo "<script>alert('El correo ya está registrado'); window.location.href = 'register.php';</script>";
     } else {
-        $sql = "INSERT INTO usuario (username, Email, contraseña) VALUES ('$username', '$email', '$password' )";
+        $sql = "INSERT INTO usuario (username, Email, Contraseña) VALUES ('$username', '$email', '$password' )";
         if ($conn->query($sql) === TRUE) {
             echo "<script>alert('Registro exitoso'); window.location.href = '../index.php';</script>";
         } else {
@@ -34,7 +33,7 @@ if (isset($_POST['login'])) {
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        if (password_verify($password, $user['password'])) {
+        if (password_verify($password, $user['Contraseña'])) {
             $_SESSION['username'] = $username;
             header("Location: ../index.php"); // Redirigir a index.php
             exit(); // Asegurarse de detener la ejecución del script
