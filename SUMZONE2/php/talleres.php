@@ -3,15 +3,14 @@ include 'conexion.php';  // Incluye tu conexión a la base de datos
 session_start();
 
 // Mostrar los talleres disponibles
-$sql = "SELECT * FROM INSCRIPCION";
+$sql = "SELECT * FROM EVENTO";
 $result = $conn->query($sql);
 
 if (isset($_POST['inscribirse'])) {
-    $usuario_id = $_SESSION['username']; // Debes tener el ID del usuario logueado
+    $usuario_id = $_SESSION['ID']; // Debes tener el ID del usuario logueado
     $taller_id = $_POST['taller_id'];
-var_dump($usuario_id);
     // Verificar si ya está inscrito en el taller
-    $checkInscripcion = "SELECT * FROM INSCRIPCION WHERE `ID_usuario`='$usuario_id' AND `ID_eventos`='$taller_id'";
+    $checkInscripcion = "SELECT * FROM INSCRIPCION WHERE `ID_usuario`='$usuario_id' AND `ID_evento`='$taller_id'";
     $resultCheck = $conn->query($checkInscripcion);
 
     if ($resultCheck->num_rows > 0) {
@@ -29,10 +28,10 @@ var_dump($usuario_id);
 
 if (isset($_POST['eliminar'])) {
     $taller_id = $_POST['taller_id'];
-    $usuario_id = $_SESSION['username'];
+    $usuario_id = $_SESSION['ID'];
 
     // Eliminar la inscripción
-    $sqlEliminar = "DELETE FROM inscripcion WHERE usuario_id='$usuario_id' AND taller_id='$taller_id'";
+    $sqlEliminar = "DELETE FROM INSCRIPCION WHERE ID_usuario='$usuario_id' AND ID_evento='$taller_id'";
     if ($conn->query($sqlEliminar) === TRUE) {
         echo "<script>alert('Tu inscripción ha sido eliminada');</script>";
     } else {
@@ -55,13 +54,13 @@ if (isset($_POST['eliminar'])) {
     <div class="talleres">
         <?php while ($row = $result->fetch_assoc()): ?>
             <div class="taller">
-                <h2><?php echo $row['nombre']; ?></h2>
-                <p><?php echo $row['descripcion']; ?></p>
-                <p><strong>Horario:</strong> <?php echo $row['horario']; ?></p>
+                <h2><?php echo $row['Nombre']; ?></h2>
+                <p><?php echo $row['Fecha_inicio'];?> al <?php echo $row['Fecha_fin'];?></p>
+                <p><strong>Horario:</strong> <?php echo $row['Descripcion']; ?></p>
 
                 <!-- Formulario para inscribirse o eliminar la inscripción -->
                 <form method="POST" action="">
-                    <input type="hidden" name="taller_id" value="<?php echo $row['id']; ?>">
+                    <input type="hidden" name="taller_id" value="<?php echo $row['ID']; ?>">
                     <button type="submit" name="inscribirse">Inscribirse</button>
                     <button type="submit" name="eliminar">Eliminar Inscripción</button>
                 </form>

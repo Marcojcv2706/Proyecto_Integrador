@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `sumzone`.`USUARIO` (
   `username` VARCHAR(20) NOT NULL,
   `Email` VARCHAR(50) NOT NULL,
   `Contraseña` VARCHAR(50) NOT NULL,
-  `ROL_ID` INT NOT NULL,
+  `ROL_ID` INT NOT NULL DEFAULT 1,
   PRIMARY KEY (`ID`),
   INDEX `fk_USUARIO_ROL1_idx` (`ROL_ID` ASC),
   CONSTRAINT `fk_USUARIO_ROL1`
@@ -51,12 +51,13 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sumzone`.`EVENTO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
-  `Fecha_inicio` DATE NOT NULL,
-  `fecha_fin` DATE NOT NULL,
-  `frecuencia` VARCHAR(15) NOT NULL,
-  `horario` DATETIME NOT NULL,
+  `Nombre` VARCHAR(30) NOT NULL,
   `Descripcion` VARCHAR(300) NULL,
-  `tipo_evento` BINARY NOT NULL DEFAULT 0,
+  `Fecha` DATE NOT NULL,
+  `Frecuencia` VARCHAR(15) NOT NULL,
+  `Horario_inicio` TIME NOT NULL,
+  `Horario_fin` TIME NOT NULL,
+  `tipo_evento` BINARY(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
 
@@ -86,3 +87,9 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+INSERT INTO rol(ID, descripcion_rol) 
+VALUES (1, 'Asistente de eventos');
+
+INSERT INTO `evento`( `Nombre`, `Descripcion`, `Fecha`, `Frecuencia`, `Horario_inicio`, `Horario_fin`,`Tipo_evento`) 
+VALUES ('Taller de Ejemplo','Taller de ejmplo para probar','2024-11-06','mar, mie, jue','16:00:00','18:00:00','1');

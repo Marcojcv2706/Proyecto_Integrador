@@ -33,8 +33,17 @@ if (isset($_POST['login'])) {
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        if (password_verify($password, $user['Contraseña'])) {
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        if ( $password = $user['Contraseña']) {
             $_SESSION['username'] = $username;
+
+            $sql2 = "SELECT ID FROM USUARIO WHERE username = '$username'";
+            $result2 = $conn->query($sql2);
+
+            $row2 = $result2->fetch_assoc();
+            $usuario_id = $row2['ID'];
+            $_SESSION['ID'] = $usuario_id;
+
             header("Location: ../index.php"); // Redirigir a index.php
             exit(); // Asegurarse de detener la ejecución del script
         } else {
