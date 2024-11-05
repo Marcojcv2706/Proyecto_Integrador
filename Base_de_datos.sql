@@ -32,6 +32,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sumzone`.`USUARIO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(20) NOT NULL,
   `Email` VARCHAR(50) NOT NULL,
   `Contraseña` VARCHAR(50) NOT NULL,
   `ROL_ID` INT NOT NULL,
