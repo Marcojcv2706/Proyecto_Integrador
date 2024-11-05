@@ -55,8 +55,9 @@ if (isset($_POST['eliminar'])) {
         <?php while ($row = $result->fetch_assoc()): ?>
             <div class="taller">
                 <h2><?php echo $row['Nombre']; ?></h2>
-                <p><?php echo $row['Fecha_inicio'];?> al <?php echo $row['Fecha_fin'];?></p>
-                <p><strong>Horario:</strong> <?php echo $row['Descripcion']; ?></p>
+                <p><?php echo $row['Descripcion']; ?></p>
+                <p><strong>Horario:</strong> <?php echo substr($row['Horario_inicio'],0,5);?> a <?php echo substr($row['Horario_fin'],0,5);?></p>
+                <p><?php echo "<strong>".$row['Frecuencia']."</strong>";?></p>
 
                 <!-- Formulario para inscribirse o eliminar la inscripción -->
                 <form method="POST" action="">

@@ -1,15 +1,10 @@
 <?php
-// Conexión a la base de datos
-$conexion = new mysqli("localhost", "root", "", "sumzone");
-
-// Verifica la conexión
-if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
-}
+include 'conexion.php';
+session_start();
 
 // Consulta para obtener eventos
-$sql_eventos = "SELECT ID, Fecha_inicio, fecha_fin, Descripcion, horario, tipo_evento FROM EVENTO";
-$resultado_eventos = $conexion->query($sql_eventos);
+$sql_eventos = "SELECT ID, Nombre, Descripcion, Fecha, Frecuencia, Horario_inicio, Horario_fin, tipo_evento FROM EVENTO";
+$resultado_eventos = $conn->query($sql_eventos);
 
 $eventos = [];
 
@@ -17,24 +12,25 @@ $eventos = [];
 if ($resultado_eventos->num_rows > 0) {
     while ($row = $resultado_eventos->fetch_assoc()) {
         $eventos[] = [
-            'id' => $row['ID'],
-            'fecha_inicio' => $row['Fecha_inicio'],
-            'fecha_fin' => $row['fecha_fin'],
-            'descripcion' => $row['Descripcion'],
-            'horario' => $row['horario'],
+            'ID' => $row['ID'],
+            'Nombre' => $row['Nombre'],
+            'Descripcion' => $row['Descripcion'],
+            'Fecha' => $row['Fecha'],
+            'Frecuencia' => $row['Frecuencia'],
+            'Horario_inicio' => $row['Horario_inicio'],
+            'Horario_fin' => $row['Horario_fin'],
             'tipo_evento' => $row['tipo_evento']
         ];
     }
 }
-
 // Manejo de inscripciones
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['inscribir'])) {
     $id_evento = intval($_POST['id_evento']);
-    $id_usuario = 1; // Aquí debes obtener el ID del usuario autenticado
+    $id_usuario = $_SESSION['ID']; // Aquí debes obtener el ID del usuario autenticado
 
     // Verifica si el usuario ya está inscrito en el evento
     $sql_check = "SELECT * FROM INSCRIPCION WHERE ID_usuario = $id_usuario AND ID_evento = $id_evento";
-    $check_result = $conexion->query($sql_check);
+    $check_result = $conn->query($sql_check);
 
     if ($check_result->num_rows == 0) {
         // Inscribir al usuario
@@ -49,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['inscribir'])) {
     }
 }
 
-$conexion->close();
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -64,11 +60,11 @@ $conexion->close();
         <ul>
             <?php foreach ($eventos as $evento): ?>
                 <li>
-                    <strong><?php echo htmlspecialchars($evento['descripcion']); ?></strong><br>
-                    Fecha: <?php echo htmlspecialchars($evento['fecha_inicio']); ?> - <?php echo htmlspecialchars($evento['fecha_fin']); ?><br>
-                    Horario: <?php echo htmlspecialchars($evento['horario']); ?><br>
+                    <strong><?php echo htmlspecialchars($evento['Descripcion']); ?></strong><br>
+                    Fecha: <?php echo htmlspecialchars($evento['Fecha']); ?><br>
+                    Horario: <?php echo htmlspecialchars($evento['Horario_inicio']);?> - <?php echo htmlspecialchars($evento['Horario_fin']); ?><br>
                     <form method="post" style="display:inline;">
-                        <input type="hidden" name="id_evento" value="<?php echo $evento['id']; ?>">
+                        <input type="hidden" name="id_evento" value="<?php echo $evento['ID']; ?>">
                         <button type="submit" name="inscribir">Inscribirse</button>
                     </form>
                 </li>

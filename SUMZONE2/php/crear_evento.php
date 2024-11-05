@@ -1,12 +1,6 @@
 <?php
-// Conexión a la base de datos
-$conexion = new mysqli("localhost", "root", "", "sumzone");
-
-// Verifica la conexión
-if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
-}
-
+include 'conexion.php';
+session_start();
 // Manejo de creación de eventos
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
     $fecha_inicio = $_POST['fecha_inicio'];
@@ -17,16 +11,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
     $tipo_evento = intval($_POST['tipo_evento']);
 
     // Insertar nuevo evento
-    $sql_crear_evento = "INSERT INTO EVENTO (Fecha_inicio, fecha_fin, frecuencia, horario, Descripcion, tipo_evento) VALUES ('$fecha_inicio', '$fecha_fin', '$frecuencia', '$horario', '$descripcion', '$tipo_evento')";
+    $sql_crear_evento = "INSERT INTO EVENTO (Fecha_inicio, fecha_fin, frecuencia, horario, Descripcion, tipo_evento) 
+    VALUES ('$fecha_inicio', '$fecha_fin', '$frecuencia', '$horario', '$descripcion', '$tipo_evento')";
     
-    if ($conexion->query($sql_crear_evento) === TRUE) {
+    if ($conn->query($sql_crear_evento) === TRUE) {
         echo "Nuevo evento creado con éxito.";
     } else {
         echo "Error al crear el evento: " . $conexion->error;
     }
 }
 
-$conexion->close();
 ?>
 
 <!DOCTYPE html>

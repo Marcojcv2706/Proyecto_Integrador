@@ -1,6 +1,5 @@
 <?php
-// Conexión a la base de datos
-$conexion = new mysqli("localhost", "root", "", "sumzone");
+include 'conexion.php';
 
 // Verifica la conexión
 if ($conexion->connect_error) {
@@ -9,7 +8,7 @@ if ($conexion->connect_error) {
 
 // Consulta para obtener eventos
 $sql_eventos = "SELECT ID, Fecha_inicio, fecha_fin, Descripcion, horario FROM EVENTO";
-$resultado_eventos = $conexion->query($sql_eventos);
+$resultado_eventos = $conn->query($sql_eventos);
 
 $eventos = [];
 
