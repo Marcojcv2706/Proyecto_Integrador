@@ -1,13 +1,13 @@
 <?php
 include 'conexion.php';
-
+session_start();
 // Verifica la conexión
-if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
 }
 
 // Consulta para obtener eventos
-$sql_eventos = "SELECT ID, Fecha_inicio, fecha_fin, Descripcion, horario FROM EVENTO";
+$sql_eventos = "SELECT ID, Descripcion, Fecha, Horario_inicio, Horario_fin FROM EVENTO";
 $resultado_eventos = $conn->query($sql_eventos);
 
 $eventos = [];
@@ -17,15 +17,14 @@ if ($resultado_eventos->num_rows > 0) {
     while ($row = $resultado_eventos->fetch_assoc()) {
         $eventos[] = [
             'id' => $row['ID'],
-            'fecha_inicio' => $row['Fecha_inicio'],
-            'fecha_fin' => $row['fecha_fin'],
-            'descripcion' => $row['Descripcion'],
-            'horario' => $row['horario'],
+            'Descripcion' => $row['Descripcion'],
+            'Fecha' => $row['Fecha'],
+            'Horario_inicio' => $row['Horario_inicio'],
+            'horario_fin' => $row['Horario_fin'],
         ];
     }
 }
 
-$conexion->close();
 
 // Enviar datos de eventos a JavaScript
 echo "<script>var eventos = " . json_encode($eventos) . ";</script>";
@@ -43,9 +42,9 @@ echo "<script>var eventos = " . json_encode($eventos) . ";</script>";
         <ul>
             <?php foreach ($eventos as $evento): ?>
                 <li>
-                    <strong><?php echo htmlspecialchars($evento['descripcion']); ?></strong><br>
-                    Fecha: <?php echo htmlspecialchars($evento['fecha_inicio']); ?> - <?php echo htmlspecialchars($evento['fecha_fin']); ?><br>
-                    Horario: <?php echo htmlspecialchars($evento['horario']); ?>
+                    <strong><?php echo htmlspecialchars($evento['Descripcion']); ?></strong><br>
+                    Fecha: <?php echo substr(htmlspecialchars($evento['Fecha']),-5); ?><br>
+                    Horario: <?php echo substr(htmlspecialchars($evento['Horario_inicio']),0,5);?> - <?php echo substr(htmlspecialchars($evento['horario_fin']),0,5); ?>
                 </li>
             <?php endforeach; ?>
         </ul>
