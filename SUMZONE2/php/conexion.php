@@ -2,7 +2,7 @@
 $servidor = "localhost";
 $usuario = "root";
 $password = "";
-$base_datos = "sumzone2";
+$base_datos = "sumzone";
 
 $conn = new mysqli($servidor, $usuario, $password, $base_datos);
 
