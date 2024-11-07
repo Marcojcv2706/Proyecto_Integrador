@@ -27,13 +27,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Crear Evento</title>
+    <title>Crear Taller</title>
 </head>
 <body>
-    <h1>Crear Nuevo Evento</h1>
+    <h1>Crear Nuevo Taller</h1>
     <form method="post">
 
-        <label for="nombre">Nombre del Evento:</label>
+        <label for="nombre">Nombre del Taller:</label>
         <textarea name="nombre" required></textarea><br>
 
         <label for="descripcion">Descripción:</label>
@@ -91,11 +91,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
         <label for="horario_fin">Horario Fin:</label>
         <input type="time" name="horario_fin" required><br>
 
-        <button type="submit" name="crear_evento">Crear Evento</button>
+        <button type="submit" name="crear_evento">Crear Taller</button>
     </form>
     
     <br>
-    <a href="evento.php"><button>Volver a Eventos</button></a>
+    <a href="evento.php"><button>Volver a Taller</button></a>
     <script>
         function mostrarOpcionesFrecuencia() {
             const frecuencia = document.getElementById("frecuencia").value;

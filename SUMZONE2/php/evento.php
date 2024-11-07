@@ -55,6 +55,7 @@ if (isset($_POST['eliminar'])) {
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/talleres.css">
 </head>
+<body>
     <header class="main-header">
         <img src="../images/logo.png" alt="Logo SUMZONE" class="logo">
         <nav class="navbar">
