@@ -3,16 +3,16 @@ include 'conexion.php';
 session_start();
 // Manejo de creación de eventos
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
-    $nombre = $_POST['nombre'];
-    $descripcion = $_POST['descripcion'];
-    $fecha = $_POST['fecha'];
-    $frecuencia = intval($_POST['frecuencia']);
-    $horario_inicio = $_POST['horario_inicio'];
-    $horario_fin = $_POST['horario_fin'];
+    $nombre = $_POST['Nombre'];
+    $descripcion = $_POST['Descripcion'];
+    $fecha = $_POST['Fecha'];
+    $frecuencia = intval($_POST['Frecuencia']);
+    $horario_inicio = $_POST['Horarioinicio'];
+    $horario_fin = $_POST['Horario_fin'];
 
     // Insertar nuevo evento
     $sql_crear_evento = "INSERT INTO EVENTO (Nombre, Descripcion, Fecha, Frecuencia, Horario_inicio, Horario_fin, tipo_evento) 
-    VALUES ( '$nombre','$descripcion','$fecha', '$frecuencia',  '$horario_inicio','$horario_fin','0')";
+    VALUES ( '$nombre','$descripcion','$fecha', '$frecuencia',  '$Horario_inicio','$Horario_fin','1')";
     
     if ($conn->query($sql_crear_evento) === TRUE) {
         echo "Nuevo evento creado con éxito.";
@@ -46,8 +46,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
         <select name="frecuencia" id="frecuencia" onchange="mostrarOpcionesFrecuencia()" required>
             <option value="">Seleccione...</option>
             <option value="1">1 - Una vez al año</option>
-            <option value="3">2 - Mensualmente</option>
-            <option value="4">3 - Semanalmente</option>
+            <option value="2">2 - Cuatrimestralmente</option>
+            <option value="3">3 - Mensualmente</option>
+            <option value="4">4 - Semanalmente</option>
         </select><br>
 
         <div id="opciones_frecuencia" style="display:none;">
@@ -103,11 +104,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
 
             // Ocultar todas las opciones de frecuencia
             document.getElementById("opciones_anual").style.display = "none";
+            document.getElementById("opciones_cuatrimestral").style.display = "none";
             document.getElementById("opciones_mensual").style.display = "none";
             document.getElementById("opciones_semanal").style.display = "none";
 
             // Mostrar opciones según la frecuencia seleccionada
-            if (frecuencia == 3) {
+            if (frecuencia == 2) {
+                document.getElementById("opciones_cuatrimestral").style.display = "block";
+            } else if (frecuencia == 3) {
                 document.getElementById("opciones_mensual").style.display = "block";
             } else if (frecuencia == 4) {
                 document.getElementById("opciones_semanal").style.display = "block";

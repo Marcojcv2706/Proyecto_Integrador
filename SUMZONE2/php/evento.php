@@ -76,7 +76,7 @@ if (isset($_POST['eliminar'])) {
             </div>
         <?php endif; ?>
     </header>
-    <h1>Talleres Disponibles</h1>
+    <h1>Eventos Disponibles</h1>
     <div class="talleres">
         <?php while ($row = $result->fetch_assoc()): ?>
             <?php
