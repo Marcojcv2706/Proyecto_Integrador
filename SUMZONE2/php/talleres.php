@@ -2,12 +2,18 @@
 include 'conexion.php';  // Incluye tu conexión a la base de datos
 session_start();
 
+if (!isset($_SESSION['username'])) {
+    echo "<script>window.location.href = 'login_register.php';</script>";
+    die();
+}
+
 // Mostrar los talleres disponibles
 $sql = "SELECT * FROM EVENTO";
 $result = $conn->query($sql);
 
+$usuario_id = $_SESSION['ID'];
 if (isset($_POST['inscribirse'])) {
-    $usuario_id = $_SESSION['ID']; // Debes tener el ID del usuario logueado
+     // Debes tener el ID del usuario logueado
     $taller_id = $_POST['taller_id'];
     // Verificar si ya está inscrito en el taller
     $checkInscripcion = "SELECT * FROM INSCRIPCION WHERE `ID_usuario`='$usuario_id' AND `ID_evento`='$taller_id'";
@@ -38,6 +44,7 @@ if (isset($_POST['eliminar'])) {
         echo "Error al eliminar la inscripción: " . $conn->error;
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -50,9 +57,13 @@ if (isset($_POST['eliminar'])) {
 </head>
 <body>
     <h1>Talleres Disponibles</h1>
-    <a href="../index.php"><button>HOME</button></a>
     <div class="talleres">
         <?php while ($row = $result->fetch_assoc()): ?>
+            <?php
+            $taller_id2 = $row['ID'];
+            $sql2 = "SELECT * FROM INSCRIPCION i JOIN EVENTO e ON e.ID = i.ID_evento  WHERE ID_usuario='$usuario_id' AND ID_evento='$taller_id2'" ;
+            $res = $conn->query($sql2);
+            ?>
             <div class="taller">
                 <h2><?php echo $row['Nombre']; ?></h2>
                 <p><?php echo $row['Descripcion']; ?></p>
@@ -62,11 +73,12 @@ if (isset($_POST['eliminar'])) {
                 <!-- Formulario para inscribirse o eliminar la inscripción -->
                 <form method="POST" action="">
                     <input type="hidden" name="taller_id" value="<?php echo $row['ID']; ?>">
-                    <button type="submit" name="inscribirse">Inscribirse</button>
-                    <button type="submit" name="eliminar">Eliminar Inscripción</button>
+                    <?php if ($res->fetch_assoc()>0){echo '<button type="submit" name="eliminar">Eliminar Inscripción</button>';}
+                    else{echo '<button type="submit" name="inscribirse">Inscribirse</button>';}?>
                 </form>
             </div>
         <?php endwhile; ?>
     </div>
+    <a href="../index.php"><button>HOME</button></a>
 </body>
 </html>

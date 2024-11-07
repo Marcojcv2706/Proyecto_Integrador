@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['inscribir'])) {
     if ($check_result->num_rows == 0) {
         // Inscribir al usuario
         $sql_inscripcion = "INSERT INTO INSCRIPCION (ID_usuario, ID_evento) VALUES ($id_usuario, $id_evento)";
-        if ($conexion->query($sql_inscripcion) === TRUE) {
+        if ($conn->query($sql_inscripcion) === TRUE) {
             echo "Inscripción realizada con éxito.";
         } else {
             echo "Error al inscribirse: " . $conexion->error;
@@ -44,8 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['inscribir'])) {
         echo "Ya estás inscrito en este evento.";
     }
 }
-
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -53,21 +51,24 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <title>Eventos</title>
+    <link rel="stylesheet" href="../css/talleres.css">
 </head>
 <body>
     <h1>Eventos</h1>
-    <div id="eventos">
+    <div id="taller">
         <ul>
             <?php foreach ($eventos as $evento): ?>
+                <div class="talleres">
                 <li>
                     <strong><?php echo htmlspecialchars($evento['Descripcion']); ?></strong><br>
                     Fecha: <?php echo htmlspecialchars($evento['Fecha']); ?><br>
-                    Horario: <?php echo htmlspecialchars($evento['Horario_inicio']);?> - <?php echo htmlspecialchars($evento['Horario_fin']); ?><br>
+                    Horario: <?php echo htmlspecialchars(substr($evento['Horario_inicio'],0,5));?> - <?php echo htmlspecialchars(substr($evento['Horario_fin'],0,5)); ?><br>
                     <form method="post" style="display:inline;">
                         <input type="hidden" name="id_evento" value="<?php echo $evento['ID']; ?>">
                         <button type="submit" name="inscribir">Inscribirse</button>
                     </form>
                 </li>
+                </div>
             <?php endforeach; ?>
         </ul>
     </div>
