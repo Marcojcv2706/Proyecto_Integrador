@@ -14,7 +14,10 @@ session_start();
         <img src="images/logo.png" alt="Logo SUMZONE" class="logo">
         <nav class="navbar">
             <ul>
-                <li><a href="php/login_register.php">Iniciar Sesión</a></li>
+                <?php
+                if (!isset($_SESSION['username'])){
+                echo '<li><a href="php/login_register.php">Iniciar Sesión</a></li>';}
+                else{echo '<li><a href="index.php">Home</a></li>';}?>
                 <li><a href="php/talleres.php">Talleres</a></li>
                 <li><a href="php/calendario.php">Calendario</a></li>
                 <li><a href="php/evento.php">Eventos</a></li>

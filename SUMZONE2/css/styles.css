@@ -125,6 +125,7 @@ body::before {
 
 .btn:hover {
     background-color: #35770f;
+}
 
 .main-footer {
     background-color: #2fa512;
@@ -150,5 +151,4 @@ body::before {
 
 .suggestions-link:hover {
     background-color: #35770f;
-}
 }

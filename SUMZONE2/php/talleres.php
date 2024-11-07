@@ -8,7 +8,7 @@ if (!isset($_SESSION['username'])) {
 }
 
 // Mostrar los talleres disponibles
-$sql = "SELECT * FROM EVENTO";
+$sql = "SELECT * FROM EVENTO WHERE tipo_evento = 1";
 $result = $conn->query($sql);
 
 $usuario_id = $_SESSION['ID'];
@@ -53,9 +53,31 @@ if (isset($_POST['eliminar'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Talleres</title>
+    <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/talleres.css">
 </head>
 <body>
+    <header class="main-header">
+        <img src="../images/logo.png" alt="Logo SUMZONE" class="logo">
+        <nav class="navbar">
+            <ul>
+                <?php if (!isset($_SESSION['username'])){
+                echo '<li><a href="php/login_register.php">Iniciar Sesión</a></li>';}
+                else{echo '<li><a href="../index.php">Home</a></li>';}?>
+                <li><a href="talleres.php">Talleres</a></li>
+                <li><a href="calendario.php">Calendario</a></li>
+                <li><a href="evento.php">Eventos</a></li>
+                <li><a href="https://www.flickr.com/photos/isamisiones/albums/with/72177720316806309" target="_blank">Álbum de Fotos</a></li>
+            </ul>
+        </nav>
+        
+        <?php if (isset($_SESSION['username'])): ?>
+            <div class="user-profile">
+                <p>Bienvenido, <?php echo htmlspecialchars($_SESSION['username']); ?></p>
+                <a href="php/logout.php">Cerrar sesión</a>
+            </div>
+        <?php endif; ?>
+    </header>
     <h1>Talleres Disponibles</h1>
     <div class="talleres">
         <?php while ($row = $result->fetch_assoc()): ?>
@@ -79,6 +101,9 @@ if (isset($_POST['eliminar'])) {
             </div>
         <?php endwhile; ?>
     </div>
-    <a href="../index.php"><button>HOME</button></a>
+    <footer class="main-footer">
+        <p>&copy; 2024 SUMZONE. Todos los derechos reservados.</p>
+    </footer>
+    <a href="" class="suggestions-link">Sugerencias, Preguntas y Pedidos de Eventos</a>
 </body>
 </html>
