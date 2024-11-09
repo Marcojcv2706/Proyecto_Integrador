@@ -24,13 +24,34 @@ session_start();
                 <li><a href="https://www.flickr.com/photos/isamisiones/albums/with/72177720316806309" target="_blank">Álbum de Fotos</a></li>
             </ul>
         </nav>
+        <button id="menuButton">Mi Cuenta</button>
+
+        <div id="menu" class="menu">
+            <?php if (isset($_SESSION['username'])): ?>
+                <div class="user-profile">
+                    <p>Bienvenido, <?php echo htmlspecialchars($_SESSION['username']); ?></p>
+                    <a href="php/logout.php">Cerrar sesión</a>
+                </div>
+                <button id="closeButton">Cerrar</button>
+                <h3>Mi Cuenta</h3>
+                <button id="editButton">Editar</button>
+                <button id="deleteButton">Borrar Cuenta</button>
+                <h3 hidden>¡Inicia sesión para acceder a las funciones!</h3>
+                <button id="inicioButton" hidden>Iniciar Session</button>
+            <?php endif; if (!isset($_SESSION['username'])):?>
+                <div class="user-profile" hidden>
+                    <p>Bienvenido, <?php echo htmlspecialchars($_SESSION['username']); ?></p>
+                    <a href="php/logout.php">Cerrar sesión</a>
+                </div>
+                <button id="closeButton" hidden>Cerrar</button>
+                <h3 hidden>Mi Cuenta</h3>
+                <button id="editButton" hidden>Editar</button>
+                <button id="deleteButton" hidden>Borrar Cuenta</button>
+                <h3>¡Inicia sesión para acceder a las funciones!</h3>
+                <button id="inicioButton">Iniciar Session</button>
+            <?php endif;?>
+        </div>
         
-        <?php if (isset($_SESSION['username'])): ?>
-            <div class="user-profile">
-                <p>Bienvenido, <?php echo htmlspecialchars($_SESSION['username']); ?></p>
-                <a href="php/logout.php">Cerrar sesión</a>
-            </div>
-        <?php endif; ?>
     </header>
 
     <main class="content">
@@ -42,5 +63,6 @@ session_start();
         <p>&copy; 2024 SUMZONE. Todos los derechos reservados.</p>
     </footer>
     <a href="" class="suggestions-link">Sugerencias, Preguntas y Pedidos de Eventos</a>
+    <script src="script.js"></script>
 </body>
 </html>

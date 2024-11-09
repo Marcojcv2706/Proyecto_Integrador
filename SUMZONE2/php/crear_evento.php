@@ -10,15 +10,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
     $horario_inicio = $_POST['horario_inicio'];
     $horario_fin = $_POST['horario_fin'];
 
+    // Verificamos si el array de números fue enviado
+    if (isset($_POST['numeros[]']) && is_array($_POST['numeros[]'])) {
+        $numeros_seleccionados = $_POST['numeros[]'];
+        echo "Has seleccionado los números: " . implode(", ", array_map('htmlspecialchars', $numeros_seleccionados));
+    } else {
+        echo "No se ha seleccionado ningún número.";
+    }
+
+    echo $frecuencia;
     // Insertar nuevo evento
-    $sql_crear_evento = "INSERT INTO EVENTO (Nombre, Descripcion, Fecha, Frecuencia, Horario_inicio, Horario_fin, tipo_evento) 
+    /*$sql_crear_evento = "INSERT INTO EVENTO (Nombre, Descripcion, Fecha, Frecuencia, Horario_inicio, Horario_fin, tipo_evento) 
     VALUES ( '$nombre','$descripcion','$fecha', '$frecuencia',  '$horario_inicio','$horario_fin','0')";
     
     if ($conn->query($sql_crear_evento) === TRUE) {
         echo "Nuevo evento creado con éxito.";
     } else {
         echo "Error al crear el evento: " . $conexion->error;
-    }
+    }*/
 }
 
 ?>
@@ -45,31 +54,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
         <label for="frecuencia">Frecuencia:</label>
         <select name="frecuencia" id="frecuencia" onchange="mostrarOpcionesFrecuencia()" required>
             <option value="">Seleccione...</option>
-            <option value="1">1 - Una vez al año</option>
-            <option value="3">2 - Mensualmente</option>
-            <option value="4">3 - Semanalmente</option>
+            <option value="0">1 - Una vez al año</option>
+            <option value="1">2 - Mensualmente</option>
+            <option value="2">3 - Semanalmente</option>
         </select><br>
 
         <div id="opciones_frecuencia" style="display:none;">
             <div id="opciones_anual" style="display:none;">
                 <!-- No se requiere opciones adicionales para una vez al año -->
             </div>
-            <div id="opciones_cuatrimestral" style="display:none;">
-                <label>Seleccione los días cuatrimestralmente:</label><br>
-                <input type="checkbox" name="dias_cuatrimestral[]" value="1"> 1 - Lunes<br>
-                <input type="checkbox" name="dias_cuatrimestral[]" value="2"> 2 - Martes<br>
-                <input type="checkbox" name="dias_cuatrimestral[]" value="3"> 3 - Miércoles<br>
-                <input type="checkbox" name="dias_cuatrimestral[]" value="4"> 4 - Jueves<br>
-                <input type="checkbox" name="dias_cuatrimestral[]" value="5"> 5 - Viernes<br>
-                <input type="checkbox" name="dias_cuatrimestral[]" value="6"> 6 - Sábado<br>
-                <input type="checkbox" name="dias_cuatrimestral[]" value="7"> 7 - Domingo<br>
-            </div>
             <div id="opciones_mensual" style="display:none;">
                 <label>Seleccione el día de cada mes:</label>
                 <select name="dia_mensual">
-                    <?php for ($i = 1; $i <= 31; $i++): ?>
-                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                    <?php endfor; ?>
+                    <?php for ($i = 1; $i <= 31; $i++){ 
+                        echo '<input type="checkbox" name="numeros[]" value="'.$i.'"> '.$i.'<br>';
+                     } ?>
                 </select>
             </div>
             <div id="opciones_semanal" style="display:none;">
@@ -107,9 +106,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
             document.getElementById("opciones_semanal").style.display = "none";
 
             // Mostrar opciones según la frecuencia seleccionada
-            if (frecuencia == 3) {
+            if (frecuencia == 1) {
                 document.getElementById("opciones_mensual").style.display = "block";
-            } else if (frecuencia == 4) {
+            } else if (frecuencia == 2) {
                 document.getElementById("opciones_semanal").style.display = "block";
             }
         }
