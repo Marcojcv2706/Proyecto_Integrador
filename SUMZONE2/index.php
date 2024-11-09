@@ -28,24 +28,22 @@ session_start();
 
         <div id="menu" class="menu">
             <?php if (isset($_SESSION['username'])): ?>
+                <h3>Mi Cuenta</h3>
                 <div class="user-profile">
                     <p>Bienvenido, <?php echo htmlspecialchars($_SESSION['username']); ?></p>
-                    <a href="php/logout.php">Cerrar sesión</a>
                 </div>
-                <button id="closeButton">Cerrar</button>
-                <h3>Mi Cuenta</h3>
-                <button id="editButton">Editar</button>
+                <button id="closeButton">Cerrar Sesion</button>
+                <button id="editButton">Editar perfil</button>
                 <button id="deleteButton">Borrar Cuenta</button>
                 <h3 hidden>¡Inicia sesión para acceder a las funciones!</h3>
                 <button id="inicioButton" hidden>Iniciar Session</button>
             <?php endif; if (!isset($_SESSION['username'])):?>
+                <h3 hidden>Mi Cuenta</h3>
                 <div class="user-profile" hidden>
                     <p>Bienvenido, <?php echo htmlspecialchars($_SESSION['username']); ?></p>
-                    <a href="php/logout.php">Cerrar sesión</a>
                 </div>
-                <button id="closeButton" hidden>Cerrar</button>
-                <h3 hidden>Mi Cuenta</h3>
-                <button id="editButton" hidden>Editar</button>
+                <button id="closeButton" hidden>Cerrar Sesión</button>
+                <button id="editButton" hidden> Perfil</button>
                 <button id="deleteButton" hidden>Borrar Cuenta</button>
                 <h3>¡Inicia sesión para acceder a las funciones!</h3>
                 <button id="inicioButton">Iniciar Session</button>

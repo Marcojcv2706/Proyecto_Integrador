@@ -115,19 +115,14 @@ button {
     border: none;
 }
 
-#closeButton {
+#deleteButton {
     background-color: #f44336;
     color: white;
     border: none;
 }
 
-#inicioButton{
-    background-color: #4a5dd6;
-    color: white;
-    border: none;
-}
-
-#editButton, #deleteButton {
+#inicioButton,
+#editButton, #closeButton {
     background-color: #2196F3;
     color: white;
     border: none;

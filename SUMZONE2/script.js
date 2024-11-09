@@ -3,7 +3,7 @@ document.getElementById('menuButton').addEventListener('click', function() {
 });
 
 document.getElementById('closeButton').addEventListener('click', function() {
-    document.getElementById('menu').style.display = 'none';
+    window.location.href = 'php/logout.php';
 });
 
 // Función para editar la cuenta
