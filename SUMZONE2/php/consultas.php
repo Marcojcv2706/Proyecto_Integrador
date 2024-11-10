@@ -39,7 +39,7 @@ if ($result->num_rows > 0) {
                         echo "<p class='respuesta'><strong>Respuesta:</strong> " . htmlspecialchars($consulta['texto_respuesta']) . "</p>";
                         echo "<p class='usuario_respuesta'><strong>Respondido por:</strong> " . htmlspecialchars($consulta['usuario_respuesta']) . "</p>";
                     } else {
-                        echo "<a href='responder_consulta.php?id=" . $consulta['ID'] . "' class='boton-responder'>Responder</a>";
+                        echo "<a href='consulta/responder_consulta.php?id=" . $consulta['ID'] . "' class='boton-responder'>Responder</a>";
                     }
                     echo "</div>";
                     $mostrar_sugerencias = true;
@@ -66,7 +66,7 @@ if ($result->num_rows > 0) {
                         echo "<p class='respuesta'><strong>Respuesta:</strong> " . htmlspecialchars($consulta['texto_respuesta']) . "</p>";
                         echo "<p class='usuario_respuesta'><strong>Respondido por:</strong> " . htmlspecialchars($consulta['usuario_respuesta']) . "</p>";
                     } else {
-                        echo "<a href='responder_consulta.php?id=" . $consulta['ID'] . "' class='boton-responder'>Responder</a>";
+                        echo "<a href='consulta/responder_consulta.php?id=" . $consulta['ID'] . "' class='boton-responder'>Responder</a>";
                     }
                     echo "</div>";
                     $mostrar_preguntas = true;
@@ -93,7 +93,7 @@ if ($result->num_rows > 0) {
                         echo "<p class='respuesta'><strong>Respuesta:</strong> " . htmlspecialchars($consulta['texto_respuesta']) . "</p>";
                         echo "<p class='usuario_respuesta'><strong>Respondido por:</strong> " . htmlspecialchars($consulta['usuario_respuesta']) . "</p>";
                     } else {
-                        echo "<a href='responder_consulta.php?id=" . $consulta['ID'] . "' class='boton-responder'>Responder</a>";
+                        echo "<a href='consulta/responder_consulta.php?id=" . $consulta['ID'] . "' class='boton-responder'>Responder</a>";
                     }
                     echo "</div>";
                     $mostrar_solicitudes = true;
@@ -106,6 +106,6 @@ if ($result->num_rows > 0) {
         </div>
     </div>
 
-    <a href="crear_consulta.php" class="boton-crear">Crear Consulta</a>
+    <a href="consulta/crear_consulta.php" class="boton-crear">Crear Consulta</a>
 </body>
 </html>

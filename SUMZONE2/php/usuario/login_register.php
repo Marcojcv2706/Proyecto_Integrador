@@ -1,5 +1,5 @@
 <?php
-include 'conexion.php';
+include '../conexion.php';
 session_start();
 
 if (isset($_POST['register'])) {
@@ -16,7 +16,7 @@ if (isset($_POST['register'])) {
     } else {
         $sql = "INSERT INTO usuario (username, Email, Contraseña) VALUES ('$username', '$email', '$password' )";
         if ($conn->query($sql) === TRUE) {
-            echo "<script>alert('Registro exitoso'); window.location.href = '../index.php';</script>";
+            echo "<script>alert('Registro exitoso'); window.location.href = '../pagina_principal.php';</script>";
         } else {
             echo "Error en el registro: " . $conn->error;
         }
@@ -44,7 +44,7 @@ if (isset($_POST['login'])) {
             $usuario_id = $row2['ID'];
             $_SESSION['ID'] = $usuario_id;
 
-            header("Location: ../index.php"); // Redirigir a index.php
+            header("Location: ../pagina_principal.php"); // Redirigir a index.php
             exit(); // Asegurarse de detener la ejecución del script
         } else {
             echo "<script>alert('Contraseña incorrecta');</script>";
@@ -59,7 +59,7 @@ if (isset($_POST['login'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/styles2.css">
+    <link rel="stylesheet" href="../../css/styles2.css">
     <title>Login y Registro</title>
 </head>
 <body>

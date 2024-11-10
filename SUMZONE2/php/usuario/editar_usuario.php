@@ -1,5 +1,5 @@
 <?php 
-include 'conexion.php';
+include '../conexion.php';
 session_start();
 
 try {
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Ejecuta la consulta
     if ($stmt->execute()) {
         echo "<script>alert('Perfil actualizado!!!');</script>";
-        header("Location: ../index.php"); 
+        header("Location: ../pagina_principal.php"); 
         exit();
     } else {
         echo "<script>alert('Error al actualizar...');</script>";
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Actualizar Registro</title>
 </head>
 <body>
-    <div class="container-edit">
+    <div class="container">
         <div id="actualizar-form" class="form-section">
             <h2>Actualizar Datos</h2>
         <form method="post" action="">

@@ -1,9 +1,9 @@
 <?php
 session_start();
-include 'conexion.php';
+include '../conexion.php';
 
 if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
+    header("Location: ../usuario/login_register.php");
     exit();
 }
 
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("isss", $ID_usuario, $tipo, $texto_consulta, $estado);
         
         if ($stmt->execute()) {
-            header("Location: consultas.php");
+            header("Location: ../consultas.php");
             exit();
         } else {
             echo "Error al enviar la consulta.";

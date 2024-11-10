@@ -58,7 +58,7 @@ if (isset($_POST['eliminar'])) {
             <ul>
                 <?php if (!isset($_SESSION['username'])){
                 echo '<li><a href="php/login_register.php">Iniciar Sesión</a></li>';}
-                else{echo '<li><a href="../index.php">Home</a></li>';}?>
+                else{echo '<li><a href="pagina_principal.php">Home</a></li>';}?>
                 <li><a href="talleres.php">Talleres</a></li>
                 <li><a href="calendario.php">Calendario</a></li>
                 <li><a href="evento.php">Eventos</a></li>
@@ -93,7 +93,9 @@ if (isset($_POST['eliminar'])) {
         </div>
         
     </header>
-    <h1>Talleres Disponibles</h1>
+    <main class="content">
+        <h1 class="main-title">Talleres</h1>
+    </main>
     <div class="talleres">
         <?php while ($row = $result->fetch_assoc()): ?>
             <?php
@@ -116,10 +118,12 @@ if (isset($_POST['eliminar'])) {
             </div>
         <?php endwhile; ?>
     </div>
+    <h2>Crear Nuevo Taller</h2>
+    <a href="taller-evento/crear_taller.php"><button>Crear Taller</button></a>
     <footer class="main-footer">
         <p>&copy; 2024 SUMZONE. Todos los derechos reservados.</p>
     </footer>
-    <a href="" class="suggestions-link">Sugerencias, Preguntas y Pedidos de Eventos</a>
+    <a href="consultas.php" class="suggestions-link">Sugerencias, Preguntas y Pedidos de Eventos</a>
     <script src="../script.js"></script>
 </body>
 </html>

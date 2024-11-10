@@ -3,17 +3,17 @@ document.getElementById('menuButton').addEventListener('click', function() {
 });
 
 document.getElementById('closeButton').addEventListener('click', function() {
-    window.location.href = 'php/logout.php';
+    window.location.href = 'usuario/logout.php';
 });
 
 // Función para editar la cuenta
 document.getElementById('editButton').addEventListener('click', function() {
-    window.location.href = 'php/editar_usuario.php';  // Ejemplo de redirección
+    window.location.href = 'usuario/editar_usuario.php';  // Ejemplo de redirección
 });
 
 document.getElementById('inicioButton').addEventListener('click', function() {
     // Puedes reemplazar esto con redirigir a una página de edición o mostrar un formulario.
-    window.location.href = 'php/login_register.php';  // Ejemplo de redirección
+    window.location.href = 'usuario/login_register.php';  // Ejemplo de redirección
 });
 
 // Función para borrar la cuenta

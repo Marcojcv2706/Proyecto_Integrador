@@ -1,5 +1,5 @@
 <?php
-include 'conexion.php';
+include '../conexion.php';
 session_start();
 // Manejo de creación de eventos
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
@@ -10,24 +10,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
     $horario_inicio = $_POST['horario_inicio'];
     $horario_fin = $_POST['horario_fin'];
 
-    // Verificamos si el array de números fue enviado
+    /* 
     if (isset($_POST['numeros[]']) && is_array($_POST['numeros[]'])) {
         $numeros_seleccionados = $_POST['numeros[]'];
         echo "Has seleccionado los números: " . implode(", ", array_map('htmlspecialchars', $numeros_seleccionados));
     } else {
         echo "No se ha seleccionado ningún número.";
     }
+    echo $frecuencia;*/
 
-    echo $frecuencia;
-    // Insertar nuevo evento
-    /*$sql_crear_evento = "INSERT INTO EVENTO (Nombre, Descripcion, Fecha, Frecuencia, Horario_inicio, Horario_fin, tipo_evento) 
+    $sql_crear_evento = "INSERT INTO EVENTO (Nombre, Descripcion, Fecha, Frecuencia, Horario_inicio, Horario_fin, tipo_evento) 
     VALUES ( '$nombre','$descripcion','$fecha', '$frecuencia',  '$horario_inicio','$horario_fin','0')";
     
     if ($conn->query($sql_crear_evento) === TRUE) {
         echo "Nuevo evento creado con éxito.";
     } else {
         echo "Error al crear el evento: " . $conexion->error;
-    }*/
+    }
 }
 
 ?>
@@ -93,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
     </form>
     
     <br>
-    <a href="evento.php"><button>Volver a Eventos</button></a>
+    <a href="../evento.php"><button>Volver a Eventos</button></a>
     <script>
         function mostrarOpcionesFrecuencia() {
             const frecuencia = document.getElementById("frecuencia").value;

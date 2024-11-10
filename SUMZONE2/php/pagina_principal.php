@@ -7,20 +7,20 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SUMZONE - Bienvenido</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
     <header class="main-header">
-        <img src="images/logo.png" alt="Logo SUMZONE" class="logo">
+        <img src="../images/logo.png" alt="Logo SUMZONE" class="logo">
         <nav class="navbar">
             <ul>
                 <?php
                 if (!isset($_SESSION['username'])){
-                echo '<li><a href="php/login_register.php">Iniciar Sesión</a></li>';}
-                else{echo '<li><a href="index.php">Home</a></li>';}?>
-                <li><a href="php/talleres.php">Talleres</a></li>
-                <li><a href="php/calendario.php">Calendario</a></li>
-                <li><a href="php/evento.php">Eventos</a></li>
+                echo '<li><a href="usuario/login_register.php">Iniciar Sesión</a></li>';}
+                else{echo '<li><a href="pagina_principal.php">Home</a></li>';}?>
+                <li><a href="talleres.php">Talleres</a></li>
+                <li><a href="calendario.php">Calendario</a></li>
+                <li><a href="evento.php">Eventos</a></li>
                 <li><a href="https://www.flickr.com/photos/isamisiones/albums/with/72177720316806309" target="_blank">Álbum de Fotos</a></li>
             </ul>
         </nav>
@@ -60,7 +60,7 @@ session_start();
     <footer class="main-footer">
         <p>&copy; 2024 SUMZONE. Todos los derechos reservados.</p>
     </footer>
-    <a href="./php/sugerencias.php" class="suggestions-link">Sugerencias, Preguntas y Pedidos de Eventos</a>
-    <script src="script.js"></script>
+    <a href="consultas.php" class="suggestions-link">Sugerencias, Preguntas y Pedidos de Eventos</a>
+    <script src="../script.js"></script>
 </body>
 </html>

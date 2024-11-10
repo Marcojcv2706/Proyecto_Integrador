@@ -1,9 +1,9 @@
 <?php
 session_start();
-include 'conexion.php';
+include '../conexion.php';
 
 if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
+    header("Location: ../usuario/login_register.php");
     exit();
 }
 
@@ -34,7 +34,7 @@ if (isset($_GET['id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $respuesta = $_POST['respuesta'];
-    $usuario_respuesta_id = $_SESSION['ID_usuario'];
+    $usuario_respuesta_id = $_SESSION['ID'];
 
     // Actualizar la consulta con la respuesta y el ID del usuario que responde
     $sql = "UPDATE consultas SET estado = 'respondido', texto_respuesta = ?, ID_usuario_respuesta = ? WHERE ID = ?";
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param("sii", $respuesta, $usuario_respuesta_id, $id);
     if ($stmt->execute()) {
         echo "Consulta respondida exitosamente.";
-        header("Location: consultas.php");
+        header("Location: ../consultas.php");
         exit();
     } else {
         echo "Error al responder la consulta.";
@@ -73,6 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ?>
     </p>
 
-    <a href="consultas.php">Volver a la lista de consultas</a>
+    <a href="../consultas.php">Volver a la lista de consultas</a>
 </body>
 </html>
