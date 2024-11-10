@@ -87,7 +87,7 @@ ALTER TABLE `consultas`
 -- Filtros para la tabla `consultas`
 --
 ALTER TABLE `consultas`
-  ADD CONSTRAINT `consultas_ibfk_1` FOREIGN KEY (`ID_usuario`) REFERENCES `usuario` (`ID_usuario`);
+  ADD CONSTRAINT `consultas_ibfk_1` FOREIGN KEY (`ID_usuario`) REFERENCES `usuario` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

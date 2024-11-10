@@ -8,9 +8,7 @@ document.getElementById('closeButton').addEventListener('click', function() {
 
 // Función para editar la cuenta
 document.getElementById('editButton').addEventListener('click', function() {
-    alert("Redirigiendo a la página de edición de cuenta...");
-    // Puedes reemplazar esto con redirigir a una página de edición o mostrar un formulario.
-    window.location.href = '/editar-cuenta';  // Ejemplo de redirección
+    window.location.href = 'php/editar_usuario.php';  // Ejemplo de redirección
 });
 
 document.getElementById('inicioButton').addEventListener('click', function() {

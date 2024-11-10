@@ -83,13 +83,22 @@ CREATE TABLE IF NOT EXISTS `sumzone`.`INSCRIPCION` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+CREATE TABLE `sumzone`.`consultas` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_usuario` int(11) DEFAULT NULL,
+  `tipo_consulta` enum('sugerencia','pregunta','solicitud') DEFAULT NULL,
+  `texto_consulta` text DEFAULT NULL,
+  `fecha_consulta` timestamp NULL DEFAULT current_timestamp(),
+  `estado` enum('pendiente','respondida','resuelta') DEFAULT 'pendiente',
+  `texto_respuesta` text DEFAULT NULL,
+  `ID_usuario_respuesta` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+ALTER TABLE `sumzone`.`consultas`
+  ADD KEY `ID_usuario` (`ID_usuario`),
+  ADD CONSTRAINT `consultas_ibfk_1` FOREIGN KEY (`ID_usuario`) REFERENCES `usuario` (`ID`);
+COMMIT;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
-INSERT INTO rol(ID, descripcion_rol) 
-VALUES (1, 'Asistente de eventos');
-
-INSERT INTO `evento`( `Nombre`, `Descripcion`, `Fecha`, `Frecuencia`, `Horario_inicio`, `Horario_fin`,`Tipo_evento`) 
-VALUES ('Taller de Ejemplo','Taller de ejmplo para probar','2024-11-06','mar, mie, jue','16:00:00','18:00:00','1');

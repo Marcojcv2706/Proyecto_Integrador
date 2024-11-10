@@ -3,8 +3,8 @@ include('conexion.php');
 
 $query = "SELECT c.*, u.username AS usuario_consulta, r.username AS usuario_respuesta 
           FROM consultas c 
-          JOIN usuario u ON c.ID_usuario = u.ID_usuario
-          LEFT JOIN usuario r ON c.ID_usuario_respuesta = r.ID_usuario";
+          JOIN usuario u ON c.ID_usuario = u.ID
+          LEFT JOIN usuario r ON c.ID_usuario_respuesta = r.ID";
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {

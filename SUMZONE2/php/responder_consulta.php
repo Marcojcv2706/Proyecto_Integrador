@@ -13,8 +13,8 @@ if (isset($_GET['id'])) {
     // Consulta para obtener la información de la consulta, incluyendo el usuario que la respondió (si lo hizo)
     $sql = "SELECT c.*, u.username AS usuario_consulta, r.username AS usuario_respuesta
             FROM consultas c
-            JOIN usuario u ON c.ID_usuario = u.ID_usuario
-            LEFT JOIN usuario r ON c.ID_usuario_respuesta = r.ID_usuario
+            JOIN usuario u ON c.ID_usuario = u.ID
+            LEFT JOIN usuario r ON c.ID_usuario_respuesta = r.ID
             WHERE c.ID = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
