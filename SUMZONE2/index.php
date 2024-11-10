@@ -60,7 +60,7 @@ session_start();
     <footer class="main-footer">
         <p>&copy; 2024 SUMZONE. Todos los derechos reservados.</p>
     </footer>
-    <a href="" class="suggestions-link">Sugerencias, Preguntas y Pedidos de Eventos</a>
+    <a href="./php/sugerencias.php" class="suggestions-link">Sugerencias, Preguntas y Pedidos de Eventos</a>
     <script src="script.js"></script>
 </body>
 </html>
