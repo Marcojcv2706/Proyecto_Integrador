@@ -65,7 +65,7 @@ if (isset($_POST['eliminar'])) {
                 else{echo '<li><a href="pagina_principal.php">Home</a></li>';}?>
                 <li><a href="talleres.php">Talleres</a></li>
                 <li><a href="calendario.php">Calendario</a></li>
-                <li><a href="evento.php">Eventos</a></li>
+                <li><a href="evento.php" class="active">Eventos</a></li>
                 <li><a href="https://www.flickr.com/photos/isamisiones/albums/with/72177720316806309" target="_blank">Álbum de Fotos</a></li>
             </ul>
         </nav>

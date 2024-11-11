@@ -1,5 +1,6 @@
 <?php
 include('conexion.php');
+session_start();
 
 $query = "SELECT c.*, u.username AS usuario_consulta, r.username AS usuario_respuesta 
           FROM consultas c 
@@ -20,8 +21,10 @@ if ($result->num_rows > 0) {
     <meta charset="UTF-8">
     <title>Consultas</title>
     <link rel="stylesheet" href="../css/consultas.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+    <a href="pagina_principal.php" class="boton-salir">Volver a Inicio</a>
     <h2>Lista de Consultas</h2>
     <div class="container">
         <div class="column">
@@ -39,8 +42,9 @@ if ($result->num_rows > 0) {
                         echo "<p class='respuesta'><strong>Respuesta:</strong> " . htmlspecialchars($consulta['texto_respuesta']) . "</p>";
                         echo "<p class='usuario_respuesta'><strong>Respondido por:</strong> " . htmlspecialchars($consulta['usuario_respuesta']) . "</p>";
                     } else {
+                        if ($_SESSION['ID']>2) {
                         echo "<a href='consulta/responder_consulta.php?id=" . $consulta['ID'] . "' class='boton-responder'>Responder</a>";
-                    }
+                    }}
                     echo "</div>";
                     $mostrar_sugerencias = true;
                 }
@@ -66,8 +70,9 @@ if ($result->num_rows > 0) {
                         echo "<p class='respuesta'><strong>Respuesta:</strong> " . htmlspecialchars($consulta['texto_respuesta']) . "</p>";
                         echo "<p class='usuario_respuesta'><strong>Respondido por:</strong> " . htmlspecialchars($consulta['usuario_respuesta']) . "</p>";
                     } else {
+                        if ($_SESSION['ID']>2) {
                         echo "<a href='consulta/responder_consulta.php?id=" . $consulta['ID'] . "' class='boton-responder'>Responder</a>";
-                    }
+                    }}
                     echo "</div>";
                     $mostrar_preguntas = true;
                 }
@@ -93,8 +98,9 @@ if ($result->num_rows > 0) {
                         echo "<p class='respuesta'><strong>Respuesta:</strong> " . htmlspecialchars($consulta['texto_respuesta']) . "</p>";
                         echo "<p class='usuario_respuesta'><strong>Respondido por:</strong> " . htmlspecialchars($consulta['usuario_respuesta']) . "</p>";
                     } else {
+                        if ($_SESSION['ID']>2) {
                         echo "<a href='consulta/responder_consulta.php?id=" . $consulta['ID'] . "' class='boton-responder'>Responder</a>";
-                    }
+                    }}
                     echo "</div>";
                     $mostrar_solicitudes = true;
                 }

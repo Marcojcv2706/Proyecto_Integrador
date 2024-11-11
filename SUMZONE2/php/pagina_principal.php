@@ -17,7 +17,7 @@ session_start();
                 <?php
                 if (!isset($_SESSION['username'])){
                 echo '<li><a href="usuario/login_register.php">Iniciar Sesión</a></li>';}
-                else{echo '<li><a href="pagina_principal.php">Home</a></li>';}?>
+                else{echo '<li><a href="pagina_principa.php" class="active">Home</a></li>';}?>
                 <li><a href="talleres.php">Talleres</a></li>
                 <li><a href="calendario.php">Calendario</a></li>
                 <li><a href="evento.php">Eventos</a></li>
