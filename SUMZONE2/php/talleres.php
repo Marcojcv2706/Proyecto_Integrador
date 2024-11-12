@@ -1,6 +1,9 @@
 <?php 
 include 'conexion.php';  // Incluye tu conexión a la base de datos
 session_start();
+ini_set('display_errors', 0);
+error_reporting(0);
+
 
 // Mostrar los talleres disponibles
 $sql = "SELECT * FROM EVENTO WHERE tipo_evento = 1";
@@ -57,7 +60,7 @@ if (isset($_POST['eliminar'])) {
         <nav class="navbar">
             <ul>
                 <?php if (!isset($_SESSION['username'])){
-                echo '<li><a href="php/login_register.php">Iniciar Sesión</a></li>';}
+                echo '<li><a href="usuario/login_register.php">Iniciar Sesión</a></li>';}
                 else{echo '<li><a href="pagina_principal.php">Home</a></li>';}?>
                 <li><a href="talleres.php" class="active">Talleres</a></li>
                 <li><a href="calendario.php">Calendario</a></li>
@@ -93,9 +96,7 @@ if (isset($_POST['eliminar'])) {
         </div>
         
     </header>
-    <main class="content">
-        <h1 class="main-title">Talleres</h1>
-    </main>
+    <h1>Talleres</h1>
     <div class="talleres">
         <?php while ($row = $result->fetch_assoc()): ?>
             <?php
@@ -110,16 +111,19 @@ if (isset($_POST['eliminar'])) {
                 <p><?php echo "<strong>".$row['Frecuencia']."</strong>";?></p>
 
                 <!-- Formulario para inscribirse o eliminar la inscripción -->
+                <?php if (isset($_SESSION['username'])): ?>
                 <form method="POST" action="">
                     <input type="hidden" name="taller_id" value="<?php echo $row['ID']; ?>">
                     <?php if ($res->fetch_assoc()>0){echo '<button type="submit" name="eliminar">Eliminar Inscripción</button>';}
                     else{echo '<button type="submit" name="inscribirse">Inscribirse</button>';}?>
                 </form>
+                <?php endif;?>
             </div>
         <?php endwhile; ?>
     </div>
-    <h2>Crear Nuevo Taller</h2>
-    <a href="taller-evento/crear_taller.php"><button>Crear Taller</button></a>
+    <?php if ($_SESSION['ROL_ID']>1)
+    echo '<h2>Crear Nuevo Taller</h2>
+    <a href="taller-evento/crear_taller.php"><button>Crear Taller</button></a>';?>
     <footer class="main-footer">
         <p>&copy; 2024 SUMZONE. Todos los derechos reservados.</p>
     </footer>

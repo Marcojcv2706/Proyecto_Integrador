@@ -7,6 +7,24 @@ body {
     height: 100vh;
     margin: 0;
 }
+.boton-salir {
+    display: block;
+    width: 150px;
+    margin: auto;
+    padding: 10px;
+    background-color: #ff2828;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 5px;
+    position: absolute;
+    top: 13px;
+    left: 20px;
+}
+
+.boton-salir:hover {
+    background-color: #b55050;
+}
 
 .container {
     display: flex;

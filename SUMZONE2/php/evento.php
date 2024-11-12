@@ -1,10 +1,9 @@
 <?php
 include 'conexion.php';
 session_start();
-if (!isset($_SESSION['username'])) {
-    echo "<script>window.location.href = 'login_register.php';</script>";
-    die();
-}
+ini_set('display_errors', 0);
+error_reporting(0);
+
 
 // Mostrar los talleres disponibles
 $sql = "SELECT * FROM EVENTO WHERE tipo_evento = 0";
@@ -61,7 +60,7 @@ if (isset($_POST['eliminar'])) {
         <nav class="navbar">
             <ul>
                 <?php if (!isset($_SESSION['username'])){
-                echo '<li><a href="php/login_register.php">Iniciar Sesión</a></li>';}
+                echo '<li><a href="usuario/login_register.php">Iniciar Sesión</a></li>';}
                 else{echo '<li><a href="pagina_principal.php">Home</a></li>';}?>
                 <li><a href="talleres.php">Talleres</a></li>
                 <li><a href="calendario.php">Calendario</a></li>
@@ -112,16 +111,19 @@ if (isset($_POST['eliminar'])) {
                 <p><?php echo "<strong>".$row['Frecuencia']."</strong>";?></p>
 
                 <!-- Formulario para inscribirse o eliminar la inscripción -->
+                <?php if (isset($_SESSION['username'])): ?>
                 <form method="POST" action="">
                     <input type="hidden" name="taller_id" value="<?php echo $row['ID']; ?>">
                     <?php if ($res->fetch_assoc()>0){echo '<button type="submit" name="eliminar">Eliminar Inscripción</button>';}
                     else{echo '<button type="submit" name="inscribirse">Inscribirse</button>';}?>
                 </form>
+                <?php endif;?>
             </div>
         <?php endwhile; ?>
-    </div>
+    </div> <?php  
+    if ($_SESSION['ROL_ID']>1){echo '
     <h2>Crear Nuevo Evento</h2>
-    <a href="taller-evento/crear_evento.php"><button>Crear Evento</button></a>
+    <a href="taller-evento/crear_evento.php"><button>Crear Evento</button></a>';}?>
     <footer class="main-footer">
         <p>&copy; 2024 SUMZONE. Todos los derechos reservados.</p>
     </footer>

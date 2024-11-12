@@ -10,10 +10,23 @@ try {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
+    if (isset($_POST['new_username']) && ($_POST['new_username'] != "")){
     $new_username = $_POST['new_username'];
+    }else{
+    $new_username = $_SESSION['username'];
+    }
+
+    if (isset($_POST['new_email']) && ($_POST['new_email'] != "")){
     $new_email = $_POST['new_email'];
+    }else{
+    $new_email = $_SESSION['Email'];
+    }
+    if (isset($_POST['new_password']) && ($_POST['new_password'] != "")){
     $new_password = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
+    }else{
+    $new_password = password_hash($_SESSION['Contra'], PASSWORD_DEFAULT);
+    }
+    
 
     $user_id = $_SESSION['ID'];
 
@@ -51,9 +64,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h2>Actualizar Datos</h2>
         <form method="post" action="">
 
-        <input type="text" name="new_username" placeholder="Nuevo Nombre de Usuario" required><br>
-        <input type="email" name="new_email" placeholder="Nuevo Email" required><br>
-        <input type="password" name="new_password" placeholder="Nueva Contraseña" required><br>
+        <label for="new_username"><?php echo $_SESSION['username'];?><br></label>
+        <input type="text" name="new_username" placeholder="Nuevo Nombre de Usuario"><br>
+
+        <label for="new_email"><?php echo $_SESSION['Email'];?><br></label>
+        <input type="email" name="new_email" placeholder="Nuevo Email"><br>
+
+        <input type="password" name="new_password" placeholder="Nueva Contraseña"><br>
 
         <button type="submit" value="Actualizar">Actualizar</button>
         </form>

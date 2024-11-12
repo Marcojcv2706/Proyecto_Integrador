@@ -20,7 +20,7 @@ session_start();
             <nav class="navbar">
                 <ul>
                     <?php if (!isset($_SESSION['username'])){
-                    echo '<li><a href="php/login_register.php">Iniciar Sesión</a></li>';}
+                    echo '<li><a href="usuario/login_register.php">Iniciar Sesión</a></li>';}
                     else{echo '<li><a href="pagina_principal.php">Home</a></li>';}?>
                     <li><a href="talleres.php">Talleres</a></li>
                     <li><a href="calendario.php" class="active">Calendario</a></li>

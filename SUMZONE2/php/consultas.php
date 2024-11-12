@@ -2,6 +2,12 @@
 include('conexion.php');
 session_start();
 
+if (!isset($_SESSION['ID'])){
+    echo "<script> alert('Registrate para acceder a esta funcion!!!');
+    window.location.href = 'usuario/login_register.php';</script>";
+    exit();
+}
+
 $query = "SELECT c.*, u.username AS usuario_consulta, r.username AS usuario_respuesta 
           FROM consultas c 
           JOIN usuario u ON c.ID_usuario = u.ID
@@ -98,7 +104,7 @@ if ($result->num_rows > 0) {
                         echo "<p class='respuesta'><strong>Respuesta:</strong> " . htmlspecialchars($consulta['texto_respuesta']) . "</p>";
                         echo "<p class='usuario_respuesta'><strong>Respondido por:</strong> " . htmlspecialchars($consulta['usuario_respuesta']) . "</p>";
                     } else {
-                        if ($_SESSION['ID']>2) {
+                        if ($_SESSION['ROL_ID']>2) {
                         echo "<a href='consulta/responder_consulta.php?id=" . $consulta['ID'] . "' class='boton-responder'>Responder</a>";
                     }}
                     echo "</div>";

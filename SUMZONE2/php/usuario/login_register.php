@@ -12,21 +12,25 @@ if (isset($_POST['register'])) {
     $checkEmail = "SELECT * FROM usuario WHERE Email='$email'";
     $resultEmail = $conn->query($checkEmail);
 
+    $checkUsername = "SELECT * FROM usuario WHERE username='$username'";
+    $resultUsername = $conn->query($checkUsername);
+
     if ($resultEmail->num_rows > 0) {
         echo "<script>alert('El correo ya está registrado'); window.location.href = 'register.php';</script>";
-    } else {
-        $sql = "INSERT INTO usuario (username, Email, Contraseña) VALUES ('$username', '$email', '$password' )";
-        if (isset($_SESSION['ID']) &&  ($_SESSION['ID']>2)){
-            $sql = "INSERT INTO usuario (username, Email, Contraseña, ROL_ID) VALUES ('$username', '$email', '$password', '' )";
-        }
-        if ($conn->query($sql) === TRUE) {
-            echo "<script>alert('Registro exitoso'); window.location.href = '../pagina_principal.php';</script>";
-        } else {
-            echo "Error en el registro: " . $conn->error;
+        } elseif ($resultUsername->num_rows > 0) {
+            echo "<script>alert('El usuario ya está registrado'); window.location.href = 'register.php';</script>";
+            }else{
+            $sql = "INSERT INTO usuario (username, Email, Contraseña) VALUES ('$username', '$email', '$password' )";
+            if (isset($_SESSION['ID']) &&  ($_SESSION['ID']>2)){
+                $sql = "INSERT INTO usuario (username, Email, Contraseña, ROL_ID) VALUES ('$username', '$email', '$password', '' )";
+            }
+            if ($conn->query($sql) === TRUE) {
+                echo "<script>alert('Registro exitoso'); window.location.href = '../pagina_principal.php';</script>";
+            } else {
+                echo "Error en el registro: " . $conn->error;
+            }
         }
     }
-}
-
 // Manejo del inicio de sesión
 if (isset($_POST['login'])) {
     $username = $_POST['login_username'];
@@ -41,15 +45,21 @@ if (isset($_POST['login'])) {
         if ( $password = $user['Contraseña']) {
             $_SESSION['username'] = $username;
 
-            $sql2 = "SELECT ID FROM USUARIO WHERE username = '$username'";
+            $sql2 = "SELECT * FROM USUARIO WHERE username = '$username'";
             $result2 = $conn->query($sql2);
 
             $row2 = $result2->fetch_assoc();
             $usuario_id = $row2['ID'];
             $_SESSION['ID'] = $usuario_id;
+            $usuario_rol = $row2['ROL_ID'];
+            $_SESSION['ROL_ID'] = $usuario_rol;
+            $usuario_email = $row2['Email'];
+            $_SESSION['Email'] = $usuario_email;
+            $usuario_contra = $row2['Contraseña'];
+            $_SESSION['Contra'] = $usuario_contra;
 
-            header("Location: ../pagina_principal.php"); // Redirigir a index.php
-            exit(); // Asegurarse de detener la ejecución del script
+            header("Location: ../pagina_principal.php"); 
+            exit();
         } else {
             echo "<script>alert('Contraseña incorrecta');</script>";
         }
@@ -67,6 +77,7 @@ if (isset($_POST['login'])) {
     <title>Login y Registro</title>
 </head>
 <body>
+    <a href="../pagina_principal.php" class="boton-salir">Volver a Inicio</a>
     <div class="container">
         <div id="login-form" class="form-section" style="display: block;">
             <h2>Iniciar Sesión</h2>
