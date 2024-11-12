@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
 
     if ($ID_usuario) {
-        $estado = 'Pendiente';  // El estado inicial puede ser 'Pendiente'
+        $estado = 'Pendiente';  
         $stmt = $conn->prepare("INSERT INTO consultas (ID_usuario, tipo_consulta, texto_consulta, estado) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("isss", $ID_usuario, $tipo, $texto_consulta, $estado);
         

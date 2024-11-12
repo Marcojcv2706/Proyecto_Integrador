@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])) {
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Consulta para obtener la información de la consulta, incluyendo el usuario que la respondió (si lo hizo)
+
     $sql = "SELECT c.*, u.username AS usuario_consulta, r.username AS usuario_respuesta
             FROM consultas c
             JOIN usuario u ON c.ID_usuario = u.ID
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $respuesta = $_POST['respuesta'];
     $usuario_respuesta_id = $_SESSION['ID'];
 
-    // Actualizar la consulta con la respuesta y el ID del usuario que responde
+
     $sql = "UPDATE consultas SET estado = 'respondido', texto_respuesta = ?, ID_usuario_respuesta = ? WHERE ID = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sii", $respuesta, $usuario_respuesta_id, $id);
@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <p><strong>Consultado por:</strong> <?php echo htmlspecialchars($consulta['usuario_consulta']); ?></p>
     <p><strong>Respondido por:</strong> 
         <?php 
-        // Verifica si se ha respondido y muestra el username del usuario que respondió
+
         echo !empty($consulta['usuario_respuesta']) ? htmlspecialchars($consulta['usuario_respuesta']) : 'No respondido'; 
         ?>
     </p>

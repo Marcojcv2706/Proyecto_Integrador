@@ -5,22 +5,19 @@ ini_set('display_errors', 0);
 error_reporting(0);
 
 
-// Mostrar los talleres disponibles
 $sql = "SELECT * FROM EVENTO WHERE tipo_evento = 0";
 $result = $conn->query($sql);
 
 $usuario_id = $_SESSION['ID'];
 if (isset($_POST['inscribirse'])) {
-     // Debes tener el ID del usuario logueado
     $taller_id = $_POST['taller_id'];
-    // Verificar si ya está inscrito en el taller
     $checkInscripcion = "SELECT * FROM INSCRIPCION WHERE `ID_usuario`='$usuario_id' AND `ID_evento`='$taller_id'";
     $resultCheck = $conn->query($checkInscripcion);
 
     if ($resultCheck->num_rows > 0) {
         echo "<script>alert('Ya estás inscrito en este taller');</script>";
     } else {
-        // Insertar la inscripción
+
         $sqlInscripcion = "INSERT INTO INSCRIPCION (ID_usuario, ID_evento) VALUES ('$usuario_id', '$taller_id')";
         if ($conn->query($sqlInscripcion) === TRUE) {
             echo "<script>alert('Te has inscrito exitosamente');</script>";
@@ -34,7 +31,7 @@ if (isset($_POST['eliminar'])) {
     $taller_id = $_POST['taller_id'];
     $usuario_id = $_SESSION['ID'];
 
-    // Eliminar la inscripción
+
     $sqlEliminar = "DELETE FROM INSCRIPCION WHERE ID_usuario='$usuario_id' AND ID_evento='$taller_id'";
     if ($conn->query($sqlEliminar) === TRUE) {
         echo "<script>alert('Tu inscripción ha sido eliminada');</script>";

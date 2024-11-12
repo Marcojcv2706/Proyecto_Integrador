@@ -9,12 +9,11 @@ body, html {
     overflow: hidden;
 }
 
-/* Fondo de pantalla con cambio de imágenes */
 .background {
     position: fixed;
     width: 100%;
     height: 100%;
-    animation: slideShow 14s infinite; /* Cambia cada 12 segundos */
+    animation: slideShow 14s infinite; 
     background-size: cover;
     background-position: center;
     z-index: -1;
@@ -24,10 +23,9 @@ body, html {
     position: absolute;
     top: 20px;
     left: 20px;
-    width: 100px; /* Ajusta el tamaño del logo */
+    width: 100px; 
 }
 
-/* Contenedor principal */
 .container {
     position: relative;
     z-index: 1;
@@ -80,10 +78,9 @@ footer {
 }
 
 
-/* Animación para cambiar de imagen */
 @keyframes slideShow {
     0% { background-image: url('images/fondo.jpg'); }
     33% { background-image: url('images/fondo2.jpg'); }
     66% { background-image: url('images/fondo.jpg'); }
-    100% { background-image: url('images/fondo.jpg'); } /* Vuelve a la primera imagen */
+    100% { background-image: url('images/fondo.jpg'); } 
 }
