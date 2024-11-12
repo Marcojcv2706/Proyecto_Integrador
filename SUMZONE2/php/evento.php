@@ -120,7 +120,7 @@ if (isset($_POST['eliminar'])) {
             <div class="taller">
                 <h2><?php echo $row['Nombre']; ?></h2>
                 <p><?php echo $row['Descripcion']; ?></p>
-                <p><?php echo "<strong>".$expl['2']." de ".$meses[$expl[2]]."</strong>";?></p>
+                <p><?php echo "<strong>".$expl['2']." de ".$meses[$expl[1]]."</strong>";?></p>
                 <p><strong>Horario:</strong> <?php echo substr($row['Horario_inicio'],0,5);?> a <?php echo substr($row['Horario_fin'],0,5);?></p>
 
                 <?php if (isset($_SESSION['username'])): ?>

@@ -1,30 +1,16 @@
 <?php
 include '../conexion.php';
 session_start();
-// Manejo de creación de eventos
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
     $nombre = $_POST['nombre'];
     $descripcion = $_POST['descripcion'];
     $fecha = $_POST['fecha'];
-    $frecuencia = ($_POST['frecuencia']);
     $horario_inicio = $_POST['horario_inicio'];
     $horario_fin = $_POST['horario_fin'];
 
-    
-    if (isset($_POST['frecuencia']) && ($_POST['frecuencia']) == "2") {
-        $numeros_seleccionados = [];
-        for ($i=0; $i < 7; $i++) { 
-            if (isset($_POST['dias_semanal'][$i])){
-                $numeros_seleccionados[$i] = $_POST['dias_semanal'][$i];
-            }
-        }
-        $dias = implode("-", array_map('htmlspecialchars', $numeros_seleccionados));
-        $frecuencia = $frecuencia.";".$dias;
-    } 
-
 
     $sql_crear_evento = "INSERT INTO EVENTO (Nombre, Descripcion, Fecha, Frecuencia, Horario_inicio, Horario_fin, tipo_evento) 
-    VALUES ( '$nombre','$descripcion','$fecha', '$frecuencia',  '$horario_inicio','$horario_fin','0')";
+    VALUES ( '$nombre','$descripcion','$fecha', '0',  '$horario_inicio','$horario_fin','0')";
 
     if ($conn->query($sql_crear_evento) === TRUE) {
         echo "<script>alert('Nuevo evento creado con éxito.');</script>";
@@ -55,17 +41,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
         <label for="fecha">Fecha del evento:</label>
         <input type="date" name="fecha" required><br>
 
-        <label for="frecuencia">Frecuencia:</label>
-        <select name="frecuencia" id="frecuencia" onchange="mostrarOpcionesFrecuencia()" required>
-            <option value="">Seleccione...</option>
-            <option value="0">1 - Una vez al año</option>
-            <option value="1">2 - Mensualmente</option>
-            <option value="2">3 - Semanalmente</option>
-        </select><br>
 
         <div id="opciones_frecuencia" style="display:none;">
             <div id="opciones_anual" style="display:none;">
-                <!-- No se requiere opciones adicionales para una vez al año -->
+               
             </div>
             <div id="opciones_mensual" style="display:none;">
                 <label>Seleccione el día de cada mes:</label>
@@ -104,12 +83,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
             const opciones = document.getElementById("opciones_frecuencia");
             opciones.style.display = frecuencia ? "block" : "none";
 
-            // Ocultar todas las opciones de frecuencia
             document.getElementById("opciones_anual").style.display = "none";
             document.getElementById("opciones_mensual").style.display = "none";
             document.getElementById("opciones_semanal").style.display = "none";
 
-            // Mostrar opciones según la frecuencia seleccionada
             if (frecuencia == 1) {
                 document.getElementById("opciones_mensual").style.display = "block";
             } else if (frecuencia == 2) {
