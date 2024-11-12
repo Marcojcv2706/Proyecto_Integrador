@@ -24,11 +24,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
 
 
     $sql_crear_evento = "INSERT INTO EVENTO (Nombre, Descripcion, Fecha, Frecuencia, Horario_inicio, Horario_fin, tipo_evento) 
-    VALUES ( '$nombre','$descripcion','$fecha', '$frecuencia',  '$horario_inicio','$horario_fin','0')";
+    VALUES ( '$nombre','$descripcion','$fecha', '$frecuencia',  '$horario_inicio','$horario_fin','1')";
 
     if ($conn->query($sql_crear_evento) === TRUE) {
         echo "<script>alert('Nuevo evento creado con éxito.');</script>";
-        header('location: ../evento.php');
+        header('location: ../talleres.php');
         exit();
     } else {
         echo "Error al crear el evento: " . $conexion->error;
@@ -98,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
     </form>
     
     <br>
-    <a href="evento.php"><button>Volver a Taller</button></a>
+    <a href="../talleres.php"><button>Volver a Taller</button></a>
     <script>
         function mostrarOpcionesFrecuencia() {
             const frecuencia = document.getElementById("frecuencia").value;

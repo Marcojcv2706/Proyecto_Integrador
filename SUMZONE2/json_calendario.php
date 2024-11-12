@@ -6,7 +6,7 @@ try {
     $pdo = new PDO("mysql:host=$servidor;dbname=$base_datos", $usuario, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql = "SELECT ID, Nombre AS Nombre, Descripcion AS Descripcion, Fecha AS Fecha, Frecuencia FROM evento";
+    $sql = "SELECT ID, Nombre AS Nombre, Descripcion AS Descripcion, Fecha AS Fecha, Frecuencia FROM evento WHERE tipo_evento = 0";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     
