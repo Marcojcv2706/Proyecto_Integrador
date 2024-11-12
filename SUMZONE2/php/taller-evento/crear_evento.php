@@ -6,29 +6,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
     $nombre = $_POST['nombre'];
     $descripcion = $_POST['descripcion'];
     $fecha = $_POST['fecha'];
-    $frecuencia = intval($_POST['frecuencia']);
+    $frecuencia = ($_POST['frecuencia']);
     $horario_inicio = $_POST['horario_inicio'];
     $horario_fin = $_POST['horario_fin'];
 
-    /* 
-    if (isset($_POST['numeros[]']) && is_array($_POST['numeros[]'])) {
-        $numeros_seleccionados = $_POST['numeros[]'];
-        echo "Has seleccionado los números: " . implode(", ", array_map('htmlspecialchars', $numeros_seleccionados));
-    } else {
-        echo "No se ha seleccionado ningún número.";
-    }
-    echo $frecuencia;*/
+    
+    if (isset($_POST['frecuencia']) && ($_POST['frecuencia']) == "2") {
+        $numeros_seleccionados = [];
+        for ($i=0; $i < 7; $i++) { 
+            if (isset($_POST['dias_semanal'][$i])){
+                $numeros_seleccionados[$i] = $_POST['dias_semanal'][$i];
+            }
+        }
+        $dias = implode("-", array_map('htmlspecialchars', $numeros_seleccionados));
+        $frecuencia = $frecuencia.";".$dias;
+    } 
+
 
     $sql_crear_evento = "INSERT INTO EVENTO (Nombre, Descripcion, Fecha, Frecuencia, Horario_inicio, Horario_fin, tipo_evento) 
     VALUES ( '$nombre','$descripcion','$fecha', '$frecuencia',  '$horario_inicio','$horario_fin','0')";
-    
+
     if ($conn->query($sql_crear_evento) === TRUE) {
-        echo "Nuevo evento creado con éxito.";
+        echo "<script>alert('Nuevo evento creado con éxito.');</script>";
+        header('location: ../evento.php');
+        exit();
     } else {
         echo "Error al crear el evento: " . $conexion->error;
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -66,19 +71,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
                 <label>Seleccione el día de cada mes:</label>
                 <select name="dia_mensual">
                     <?php for ($i = 1; $i <= 31; $i++){ 
-                        echo '<input type="checkbox" name="numeros[]" value="'.$i.'"> '.$i.'<br>';
+                        echo '<input type="checkbox" name="numeros['.$i.']" value="'.$i.'"> '.$i.'<br>';
                      } ?>
                 </select>
             </div>
             <div id="opciones_semanal" style="display:none;">
                 <label>Seleccione los días de la semana:</label><br>
-                <input type="checkbox" name="dias_semanal[]" value="1"> Lunes<br>
-                <input type="checkbox" name="dias_semanal[]" value="2"> Martes<br>
-                <input type="checkbox" name="dias_semanal[]" value="3"> Miércoles<br>
-                <input type="checkbox" name="dias_semanal[]" value="4"> Jueves<br>
-                <input type="checkbox" name="dias_semanal[]" value="5"> Viernes<br>
-                <input type="checkbox" name="dias_semanal[]" value="6"> Sábado<br>
-                <input type="checkbox" name="dias_semanal[]" value="7"> Domingo<br>
+                <input type="checkbox" name="dias_semanal[1]" value="1"> Lunes<br>
+                <input type="checkbox" name="dias_semanal[2]" value="2"> Martes<br>
+                <input type="checkbox" name="dias_semanal[3]" value="3"> Miércoles<br>
+                <input type="checkbox" name="dias_semanal[4]" value="4"> Jueves<br>
+                <input type="checkbox" name="dias_semanal[5]" value="5"> Viernes<br>
+                <input type="checkbox" name="dias_semanal[6]" value="6"> Sábado<br>
+                <input type="checkbox" name="dias_semanal[7]" value="7"> Domingo<br>
             </div>
         </div>
 
