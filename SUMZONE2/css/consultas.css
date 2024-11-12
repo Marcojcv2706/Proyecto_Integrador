@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    text-align: center; /* Centrado del contenido de todo el cuerpo */
+    text-align: center;
 }
 .boton-salir {
     display: block;

@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bindParam(':password', $new_password);
     $stmt->bindParam(':id', $user_id);
 
-    // Ejecuta la consulta
+    
     if ($stmt->execute()) {
         echo "<script>alert('Perfil actualizado!!!');</script>";
         header("Location: ../pagina_principal.php"); 

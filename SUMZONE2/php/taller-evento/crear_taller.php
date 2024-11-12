@@ -1,7 +1,6 @@
 <?php
 include '../conexion.php';
 session_start();
-// Manejo de creación de eventos
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
     $nombre = $_POST['nombre'];
     $descripcion = $_POST['descripcion'];
@@ -64,7 +63,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
 
         <div id="opciones_frecuencia" style="display:none;">
             <div id="opciones_anual" style="display:none;">
-                <!-- No se requiere opciones adicionales para una vez al año -->
             </div>
             <div id="opciones_mensual" style="display:none;">
                 <label>Seleccione el día de cada mes:</label>
@@ -103,12 +101,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
             const opciones = document.getElementById("opciones_frecuencia");
             opciones.style.display = frecuencia ? "block" : "none";
 
-            // Ocultar todas las opciones de frecuencia
             document.getElementById("opciones_anual").style.display = "none";
             document.getElementById("opciones_mensual").style.display = "none";
             document.getElementById("opciones_semanal").style.display = "none";
 
-            // Mostrar opciones según la frecuencia seleccionada
             if (frecuencia == 1) {
                 document.getElementById("opciones_mensual").style.display = "block";
             } else if (frecuencia == 2) {

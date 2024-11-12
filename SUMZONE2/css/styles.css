@@ -137,7 +137,7 @@ button {
     border: none;
 }
 
-/* Main content */
+/*main*/
 .content {
     padding: 20px;
     text-align: center;
@@ -154,10 +154,10 @@ button {
     border: 1px solid white;
     margin-bottom: 1px;
     background-color: rgba(255, 255, 255, 0.74);
-    width: 80%; /* Establece un ancho específico, como 80% del contenedor padre */
-    max-width: 600px; /* Opcional: establece un ancho máximo */
-    margin: 0 auto; /* Centra el elemento horizontalmente */
-    padding: 10px; /* Opcional: agrega algo de espacio interno */
+    width: 80%; 
+    max-width: 600px; 
+    margin: 0 auto; 
+    padding: 10px; 
 }
 
 .btn {
