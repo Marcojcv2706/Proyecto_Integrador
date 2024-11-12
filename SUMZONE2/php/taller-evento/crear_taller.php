@@ -1,21 +1,35 @@
 <?php
-include 'conexion.php';
+include '../conexion.php';
 session_start();
 // Manejo de creación de eventos
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
-    $nombre = $_POST['Nombre'];
-    $descripcion = $_POST['Descripcion'];
-    $fecha = $_POST['Fecha'];
-    $frecuencia = intval($_POST['Frecuencia']);
-    $horario_inicio = $_POST['Horarioinicio'];
-    $horario_fin = $_POST['Horario_fin'];
+    $nombre = $_POST['nombre'];
+    $descripcion = $_POST['descripcion'];
+    $fecha = $_POST['fecha'];
+    $frecuencia = ($_POST['frecuencia']);
+    $horario_inicio = $_POST['horario_inicio'];
+    $horario_fin = $_POST['horario_fin'];
 
-    // Insertar nuevo evento
-    $sql_crear_evento = "INSERT INTO EVENTO (Nombre, Descripcion, Fecha, Frecuencia, Horario_inicio, Horario_fin, tipo_evento) 
-    VALUES ( '$nombre','$descripcion','$fecha', '$frecuencia',  '$Horario_inicio','$Horario_fin','1')";
     
+    if (isset($_POST['frecuencia']) && ($_POST['frecuencia']) == "2") {
+        $numeros_seleccionados = [];
+        for ($i=0; $i < 7; $i++) { 
+            if (isset($_POST['dias_semanal'][$i])){
+                $numeros_seleccionados[$i] = $_POST['dias_semanal'][$i];
+            }
+        }
+        $dias = implode("-", array_map('htmlspecialchars', $numeros_seleccionados));   
+        $frecuencia = $frecuencia.";".$dias;
+    }
+
+
+    $sql_crear_evento = "INSERT INTO EVENTO (Nombre, Descripcion, Fecha, Frecuencia, Horario_inicio, Horario_fin, tipo_evento) 
+    VALUES ( '$nombre','$descripcion','$fecha', '$frecuencia',  '$horario_inicio','$horario_fin','0')";
+
     if ($conn->query($sql_crear_evento) === TRUE) {
-        echo "Nuevo evento creado con éxito.";
+        echo "<script>alert('Nuevo evento creado con éxito.');</script>";
+        header('location: ../evento.php');
+        exit();
     } else {
         echo "Error al crear el evento: " . $conexion->error;
     }
@@ -45,25 +59,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
         <label for="frecuencia">Frecuencia:</label>
         <select name="frecuencia" id="frecuencia" onchange="mostrarOpcionesFrecuencia()" required>
             <option value="">Seleccione...</option>
-            <option value="1">1 - Una vez al año</option>
-            <option value="2">2 - Cuatrimestralmente</option>
-            <option value="3">3 - Mensualmente</option>
-            <option value="4">4 - Semanalmente</option>
+            <option value="0">1 - Una vez al año</option>
+            <option value="1">2 - Mensualmente</option>
+            <option value="2">3 - Semanalmente</option>
         </select><br>
 
         <div id="opciones_frecuencia" style="display:none;">
             <div id="opciones_anual" style="display:none;">
                 <!-- No se requiere opciones adicionales para una vez al año -->
-            </div>
-            <div id="opciones_cuatrimestral" style="display:none;">
-                <label>Seleccione los días cuatrimestralmente:</label><br>
-                <input type="checkbox" name="dias_cuatrimestral[]" value="1"> 1 - Lunes<br>
-                <input type="checkbox" name="dias_cuatrimestral[]" value="2"> 2 - Martes<br>
-                <input type="checkbox" name="dias_cuatrimestral[]" value="3"> 3 - Miércoles<br>
-                <input type="checkbox" name="dias_cuatrimestral[]" value="4"> 4 - Jueves<br>
-                <input type="checkbox" name="dias_cuatrimestral[]" value="5"> 5 - Viernes<br>
-                <input type="checkbox" name="dias_cuatrimestral[]" value="6"> 6 - Sábado<br>
-                <input type="checkbox" name="dias_cuatrimestral[]" value="7"> 7 - Domingo<br>
             </div>
             <div id="opciones_mensual" style="display:none;">
                 <label>Seleccione el día de cada mes:</label>
@@ -75,13 +78,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
             </div>
             <div id="opciones_semanal" style="display:none;">
                 <label>Seleccione los días de la semana:</label><br>
-                <input type="checkbox" name="dias_semanal[]" value="1"> Lunes<br>
-                <input type="checkbox" name="dias_semanal[]" value="2"> Martes<br>
-                <input type="checkbox" name="dias_semanal[]" value="3"> Miércoles<br>
-                <input type="checkbox" name="dias_semanal[]" value="4"> Jueves<br>
-                <input type="checkbox" name="dias_semanal[]" value="5"> Viernes<br>
-                <input type="checkbox" name="dias_semanal[]" value="6"> Sábado<br>
-                <input type="checkbox" name="dias_semanal[]" value="7"> Domingo<br>
+                <input type="checkbox" name="dias_semanal[1]" value="1"> Lunes<br>
+                <input type="checkbox" name="dias_semanal[2]" value="2"> Martes<br>
+                <input type="checkbox" name="dias_semanal[3]" value="3"> Miércoles<br>
+                <input type="checkbox" name="dias_semanal[4]" value="4"> Jueves<br>
+                <input type="checkbox" name="dias_semanal[5]" value="5"> Viernes<br>
+                <input type="checkbox" name="dias_semanal[6]" value="6"> Sábado<br>
+                <input type="checkbox" name="dias_semanal[7]" value="7"> Domingo<br>
             </div>
         </div>
 
@@ -109,11 +112,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
             document.getElementById("opciones_semanal").style.display = "none";
 
             // Mostrar opciones según la frecuencia seleccionada
-            if (frecuencia == 2) {
-                document.getElementById("opciones_cuatrimestral").style.display = "block";
-            } else if (frecuencia == 3) {
+            if (frecuencia == 1) {
                 document.getElementById("opciones_mensual").style.display = "block";
-            } else if (frecuencia == 4) {
+            } else if (frecuencia == 2) {
                 document.getElementById("opciones_semanal").style.display = "block";
             }
         }

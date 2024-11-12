@@ -20,9 +20,7 @@ document.getElementById('inicioButton').addEventListener('click', function() {
 document.getElementById('deleteButton').addEventListener('click', function() {
     const confirmDelete = confirm("¿Estás seguro de que quieres borrar tu cuenta?");
     if (confirmDelete) {
-        alert("Cuenta eliminada");
-        // Aquí puedes agregar la lógica para eliminar la cuenta del backend, por ejemplo.
-        window.location.href = '/eliminar-cuenta';  // Ejemplo de redirección
+        window.location.href = 'usuario/eliminar_usuario.php';  // Ejemplo de redirección
     }
 });
 
