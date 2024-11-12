@@ -110,7 +110,6 @@ if (isset($_POST['eliminar'])) {
                 <p><strong>Horario:</strong> <?php echo substr($row['Horario_inicio'],0,5);?> a <?php echo substr($row['Horario_fin'],0,5);?></p>
                 <p><?php echo "<strong>".$row['Frecuencia']."</strong>";?></p>
 
-                <!-- Formulario para inscribirse o eliminar la inscripción -->
                 <?php if (isset($_SESSION['username'])): ?>
                 <form method="POST" action="">
                     <input type="hidden" name="taller_id" value="<?php echo $row['ID']; ?>">

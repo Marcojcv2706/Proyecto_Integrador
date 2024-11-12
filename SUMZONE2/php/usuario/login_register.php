@@ -8,7 +8,6 @@ if (isset($_POST['register'])) {
     $email = $_POST['reg_email'];
     $rol = $_POST['rol_id'];
 
-    // Verificar si el correo ya está registrado
     $checkEmail = "SELECT * FROM usuario WHERE Email='$email'";
     $resultEmail = $conn->query($checkEmail);
 
@@ -31,7 +30,6 @@ if (isset($_POST['register'])) {
             }
         }
     }
-// Manejo del inicio de sesión
 if (isset($_POST['login'])) {
     $username = $_POST['login_username'];
     $password = $_POST['login_password'];
@@ -77,8 +75,8 @@ if (isset($_POST['login'])) {
     <title>Login y Registro</title>
 </head>
 <body>
-    <a href="../pagina_principal.php" class="boton-salir">Volver a Inicio</a>
-    <div class="container">
+<a href="../pagina_principal.php" class="boton">Volver a Inicio</a>
+<div class="container">
         <div id="login-form" class="form-section" style="display: block;">
             <h2>Iniciar Sesión</h2>
             <form method="POST" action="">
