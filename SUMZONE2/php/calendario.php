@@ -65,7 +65,7 @@ session_start();
             var calendarioEl = document.getElementById('calendario');
             var calendar = new FullCalendar.Calendar(calendarioEl, {    
             initialView: 'dayGridMonth',
-            events: '../json_calendario.php', // Ruta al archivo PHP que devuelve los eventos
+            events: '../json_calendario.php',
             editable: false,
             selectable: false,
         eventClick: function(info) {

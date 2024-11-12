@@ -125,7 +125,6 @@ if (isset($_POST['eliminar'])) {
                 <p><?php echo "<strong>".$expl['2']." de ".$meses[$expl[2]]."</strong>";?></p>
                 <p><strong>Horario:</strong> <?php echo substr($row['Horario_inicio'],0,5);?> a <?php echo substr($row['Horario_fin'],0,5);?></p>
 
-                <!-- Formulario para inscribirse o eliminar la inscripción -->
                 <?php if (isset($_SESSION['username'])): ?>
                 <form method="POST" action="">
                     <input type="hidden" name="taller_id" value="<?php echo $row['ID']; ?>">

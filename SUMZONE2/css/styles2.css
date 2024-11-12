@@ -77,3 +77,10 @@ button {
 button:hover {
     background-color: #0dd839;
 }
+
+.boton {
+    position: absolute; 
+    top: 20px; 
+    left: 20px;
+}
+   
