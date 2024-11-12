@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
 <head>
     <meta charset="UTF-8">
     <title>Crear Evento</title>
-    <link rel="stylesheet" href="css/crear_taller.css">
+    <link rel="stylesheet" href="../../css/crear_taller.css">
 </head>
 <body>
     <h1>Crear Nuevo Evento</h1>

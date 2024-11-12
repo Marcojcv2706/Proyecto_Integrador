@@ -2,6 +2,11 @@
 include "../conexion.php";
 session_start();
 
+if ($_SESSION['ROL_ID']<=2){
+    header('location: login_register.php');
+    exit();
+}
+
 if (isset($_POST['register'])) {
     $username = $_POST['reg_username'];
     $password = password_hash($_POST['reg_password'], PASSWORD_DEFAULT);
@@ -36,14 +41,15 @@ if (isset($_POST['register'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login y Registro</title>
+    <title>Registro</title>
+    <link rel="stylesheet" href="../../css/styles2.css">
 </head>
 <body>
 <a href="../pagina_principal.php" class="boton">Volver a Inicio</a>
 <div class="container">
         
         <div id="register-form" class="form-section">
-            <h2>Registrarse</h2>
+            <h2>Registrar Usuario</h2>
             <form method="POST" action="">
                 <input type="text" name="reg_username" placeholder="Nombre de usuario" required>
                 <input type="email" name="reg_email" placeholder="Correo electrónico" required>
