@@ -77,6 +77,7 @@ if (isset($_POST['eliminar'])) {
                 <button id="deleteButton">Borrar Cuenta</button>
                 <h3 hidden>¡Inicia sesión para acceder a las funciones!</h3>
                 <button id="inicioButton" hidden>Iniciar Session</button>
+                <?php if ($_SESSION['ROL_ID']>2){echo "<a href = 'usuario/crear_usuario.php'>Crear usuario</a>";}?>
             <?php endif; if (!isset($_SESSION['username'])):?>
                 <h3 hidden>Mi Cuenta</h3>
                 <div class="user-profile" hidden>
@@ -98,12 +99,30 @@ if (isset($_POST['eliminar'])) {
             $taller_id2 = $row['ID'];
             $sql2 = "SELECT * FROM INSCRIPCION i JOIN EVENTO e ON e.ID = i.ID_evento  WHERE ID_usuario='$usuario_id' AND ID_evento='$taller_id2'" ;
             $res = $conn->query($sql2);
+            $a = 0;
+            $expl = explode(";", $row['Frecuencia']);
+            $frec = explode("-",$expl[1]);
+            $semana = [
+                1 => "lunes",
+                2 => "martes",
+                3 => "miércoles",
+                4 => "jueves",
+                5 => "viernes",
+                6 => "sábado",
+                7 => "domingo"
+            ];
+            for ($i=0; $i < 8 ; $i++) { 
+                if (isset($frec[$i])) {
+                    $dias = $dias." ".$semana[$frec[$i]];
+                }
+            }
+
             ?>
             <div class="taller">
                 <h2><?php echo $row['Nombre']; ?></h2>
                 <p><?php echo $row['Descripcion']; ?></p>
                 <p><strong>Horario:</strong> <?php echo substr($row['Horario_inicio'],0,5);?> a <?php echo substr($row['Horario_fin'],0,5);?></p>
-                <p><?php echo "<strong>".$row['Frecuencia']."</strong>";?></p>
+                <p><?php echo "<strong>".$dias."</strong>";?></p>
 
                 <?php if (isset($_SESSION['username'])): ?>
                 <form method="POST" action="">

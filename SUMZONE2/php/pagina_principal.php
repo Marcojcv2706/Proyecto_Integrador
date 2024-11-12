@@ -37,6 +37,7 @@ session_start();
                 <button id="deleteButton">Borrar Cuenta</button>
                 <h3 hidden>¡Inicia sesión para acceder a las funciones!</h3>
                 <button id="inicioButton" hidden>Iniciar Session</button>
+                <?php if ($_SESSION['ROL_ID']>2){echo "<a href = 'usuario/crear_usuario.php'>Crear usuario</a>";}?>
             <?php endif; if (!isset($_SESSION['username'])):?>
                 <h3 hidden>Mi Cuenta</h3>
                 <div class="user-profile" hidden>

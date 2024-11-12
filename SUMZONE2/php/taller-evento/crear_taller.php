@@ -21,8 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
         $dias = implode("-", array_map('htmlspecialchars', $numeros_seleccionados));   
         $frecuencia = $frecuencia.";".$dias;
     }
-
-
     $sql_crear_evento = "INSERT INTO EVENTO (Nombre, Descripcion, Fecha, Frecuencia, Horario_inicio, Horario_fin, tipo_evento) 
     VALUES ( '$nombre','$descripcion','$fecha', '$frecuencia',  '$horario_inicio','$horario_fin','1')";
 
@@ -98,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
     </form>
     
     <br>
-    <a href="../talleres.php"><button>Volver a Taller</button></a>
+    <a href="../talleres.php"><button>Volver a talleres</button></a>
     <script>
         function mostrarOpcionesFrecuencia() {
             const frecuencia = document.getElementById("frecuencia").value;
@@ -107,7 +105,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
 
             // Ocultar todas las opciones de frecuencia
             document.getElementById("opciones_anual").style.display = "none";
-            document.getElementById("opciones_cuatrimestral").style.display = "none";
             document.getElementById("opciones_mensual").style.display = "none";
             document.getElementById("opciones_semanal").style.display = "none";
 

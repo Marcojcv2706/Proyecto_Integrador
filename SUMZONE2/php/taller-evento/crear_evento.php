@@ -70,9 +70,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_evento'])) {
             <div id="opciones_mensual" style="display:none;">
                 <label>Seleccione el día de cada mes:</label>
                 <select name="dia_mensual">
-                    <?php for ($i = 1; $i <= 31; $i++){ 
-                        echo '<input type="checkbox" name="numeros['.$i.']" value="'.$i.'"> '.$i.'<br>';
-                     } ?>
+                    <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                    <?php endfor; ?>
                 </select>
             </div>
             <div id="opciones_semanal" style="display:none;">
